@@ -1,3 +1,67 @@
+# E-Commerce Store
+
+------------------------------
+
+# E-Commerce Store
+#### E-Commerce Store
+##### *Authors: Ian Gifford & Mike Kelly*
+
+------------------------------
+
+## Description
+This C# program is a mock e-commerce site.  
+
+------------------------------
+
+## Getting Started
+Clone this repository to your local machine.
+```
+$ git clone [https://github.com/Michael-S-Kelly/]
+```
+#### To run the program from Visual Studio:
+Select ```File``` -> ```Open``` -> ```Project/Solution```
+
+Next navigate to the location you cloned the Repository.
+
+Double click on the ``` ECommerce ``` directory.
+
+Then select and open ``` EComerce.sln ```
+
+------------------------------
+
+## Visuals
+
+
+##### Application Start
+![Image 1](Assets/HomePage.PNG)
+
+
+------------------------------
+
+## Change Log
+
+
+
+
+------------------------------
+## Collaborators, Contributors, and Other Resources used
+
+### Collaborators
+
+### Contributors
+Michael Kelly
+Ian Gifford
+
+
+### Other Resources
+#### Microsoft Visual C# Step by Step Ninth Edition
+#### C# 7.0 in a Nutshell
+#### C# Pocket Reference
+#### C# and .NET Core Test-Driven Development
+
+------------------------------
+For more information on Markdown: https://www.markdownguide.org/cheat-sheet
+
 # Introduction 
 TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
 
