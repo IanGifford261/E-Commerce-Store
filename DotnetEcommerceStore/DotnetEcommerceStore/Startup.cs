@@ -31,14 +31,15 @@ namespace DotnetEcommerceStore
             services.AddMvc();
 
             
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AuthenticationDb")));
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AuthenticationDb")));
 
-            services.AddDbContext<EComerceDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("EComerceDb")));
+            services.AddDbContext<EComerceDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ProductionEComerceDb")));
             
+            /*
             services.AddIdentity<ApplicationDbContext, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-            
+            */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +56,8 @@ namespace DotnetEcommerceStore
                 name: "default",
                 template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseAuthentication();
 
             app.UseStaticFiles();
 
