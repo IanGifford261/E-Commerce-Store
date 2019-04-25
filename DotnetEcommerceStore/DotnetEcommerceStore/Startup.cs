@@ -31,15 +31,15 @@ namespace DotnetEcommerceStore
             services.AddMvc();
 
             
-            //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AuthenticationDb")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultApplicationDb")));
 
-            services.AddDbContext<EComerceDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ProductionEComerceDb")));
+            services.AddDbContext<EComerceDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultEComerceDb")));
             
-            /*
-            services.AddIdentity<ApplicationDbContext, IdentityRole>()
+            
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-            */
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
