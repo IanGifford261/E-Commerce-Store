@@ -16,5 +16,6 @@ namespace DotnetEcommerceStore.Data
 
         }
 
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }

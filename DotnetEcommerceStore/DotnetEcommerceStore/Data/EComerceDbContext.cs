@@ -13,5 +13,7 @@ namespace DotnetEcommerceStore.Data
         {
 
         }
+
+        public DbSet MyProperty { get; set; }
     }
 }
