@@ -14,6 +14,11 @@ namespace DotnetEcommerceStore.Data
 
         }
 
-        //public DbSet MyProperty { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+        }
+
+        public DbSet<Product> Products { get; set; }
     }
 }
