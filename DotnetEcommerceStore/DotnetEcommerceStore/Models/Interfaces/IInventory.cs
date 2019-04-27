@@ -8,5 +8,6 @@ namespace DotnetEcommerceStore.Models.Interfaces
 {
     public interface IInventory
     {
+        
     }
 }
