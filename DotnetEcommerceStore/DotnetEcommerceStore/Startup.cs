@@ -19,10 +19,14 @@ namespace DotnetEcommerceStore
     public class Startup
     {
         public IConfiguration Configuration { get; }
+        public IHostingEnvironment Environment { get; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IHostingEnvironment environment)
         {
-            Configuration = configuration;
+            Environment = environment;
+            var builder = new ConfigurationBuilder().AddEnvironmentVariables();
+            builder.AddUserSecrets<Startup>();
+            Configuration = builder.Build();
         }
 
         public void ConfigureServices(IServiceCollection services)
