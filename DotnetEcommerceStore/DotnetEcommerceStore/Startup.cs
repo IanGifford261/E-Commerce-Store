@@ -11,7 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using DotnetEcommerceStore.Data;
 using DotnetEcommerceStore.Models;
-
+using DotnetEcommerceStore.Models.Services;
+using DotnetEcommerceStore.Models.Interfaces;
 
 namespace DotnetEcommerceStore
 {
@@ -35,6 +36,7 @@ namespace DotnetEcommerceStore
             services.AddDbContext<EComerceDbContext>(options => 
             options.UseSqlServer(Configuration.GetConnectionString("ProductionEComerceDb")));
 
+            services.AddScoped<IInventory, InventoryService>();
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
