@@ -35,7 +35,7 @@ namespace DotnetEcommerceStore
 
 
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("AuthenticationDb")));
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultApplicationDb")));
 
             services.AddDbContext<EComerceDbContext>(options => 
             options.UseSqlServer(Configuration.GetConnectionString("ProductionEComerceDb")));
