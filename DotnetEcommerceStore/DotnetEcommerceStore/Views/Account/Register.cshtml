@@ -4,10 +4,11 @@
     Layout = "_Layout";
     ViewData["Title"] = "Register";
 }
+<link rel="stylesheet" href="~/Styles/Register.css" />
 
 <h1>Register</h1>
 
-<form method="post">
+<form method="post" id="regform">
     <div asp-validation-summary="All" class="text-primary"></div>
 
     <label asp-for="Email"></label>
