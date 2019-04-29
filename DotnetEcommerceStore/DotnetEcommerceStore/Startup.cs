@@ -33,13 +33,20 @@ namespace DotnetEcommerceStore
         {
             services.AddMvc();
 
-            var connectionString_DefaultApplicationDb = Environment.IsDevelopment() ? Configuration["ConnectionStrings: DefaultApplicationDb"] : Configuration["ConnectionStrings:ProductionEComerceDb"];
+            // products
+            var conProducts = Environment.IsDevelopment()
+                ? Configuration["ConnectionStrings:EComerceDbContext"]
+                : Configuration["ConnectionStrings:ProductionEComerceDbContext"];
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(Configuration["ConnectionStrings:DefaultApplicationDb"]));
+            services.AddDbContext<EComerceDbContext>(options => options.UseSqlServer(conProducts));
 
-            services.AddDbContext<EComerceDbContext>(options => 
-            options.UseSqlServer(Configuration["ConnectionStrings:ProductionEComerceDb"]));
+            // users
+            var conUsers = Environment.IsDevelopment()
+                ? Configuration["ConnectionStrings:DefaultApplicationDb"]
+                : Configuration["ConnectionStrings:ProductionApplicationDb"];
+
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(conUsers));
+            
 
             services.AddScoped<IInventory, InventoryService>();
 
