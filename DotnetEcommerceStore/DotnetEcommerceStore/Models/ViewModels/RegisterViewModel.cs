@@ -21,6 +21,10 @@ namespace DotnetEcommerceStore.Models.ViewModels
         public string FavInstrument { get; set; }
         
         [Required]
+        [Display(Name = "Profesional Musician?")]
+        public bool ProMusician { get; set; }
+
+        [Required]
         [EmailAddress]
         public string Email { get; set; }
 
