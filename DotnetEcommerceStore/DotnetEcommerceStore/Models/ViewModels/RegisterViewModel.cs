@@ -15,6 +15,9 @@ namespace DotnetEcommerceStore.Models.ViewModels
         [Display(Name = "First Name")]
         public string LastName { get; set; }
         [Required]
+        [Display(Name = "Favorite Instrument")]
+        public string FavInstrument { get; set; }
+        [Required]
         public string Email { get; set; }
         [Required]
         [DataType(DataType.Password)]

@@ -61,6 +61,8 @@ namespace DotnetEcommerceStore.Controllers
 
                     Claim email = new Claim(ClaimTypes.Email, user.Email, ClaimValueTypes.Email);
 
+                    Claim favInst = new Claim("Favorite Instrument", $"{user.FavInstrument}");
+
                     List<Claim> claims = new List<Claim> { nameClaim, email };
 
                     await _userManager.AddClaimsAsync(user, claims);
