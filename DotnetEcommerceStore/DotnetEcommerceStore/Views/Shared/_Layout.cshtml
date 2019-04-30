@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using DotnetEcommerceStore.Models
+@inject SignInManager<ApplicationUser> signInManager
+
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -19,7 +24,15 @@
 <body>
     <header>
         <nav class="navbar navbar-dark bg-dark navbar-expand-lg fixed-top">
-            <a href="/Home" class="navbar-brand"><img src="~/Images/NavBar/bassTrebleHeart.jpg" alt="Music Store Logo" alt="free use image from https://ayoqq.org/explore/bass-drawing-treble-clef-heart/" height="30" width="30">  Welcome to the Music Store</a>
+            @if (signInManager.IsSignedIn(User))
+            {
+                <a href="/Home" class="navbar-brand"><img src="~/Images/NavBar/bassTrebleHeart.jpg" alt="Music Store Logo" alt="free use image from https://ayoqq.org/explore/bass-drawing-treble-clef-heart/" height="30" width="30">  Welcome @User.Claims.First(fn => fn.Type == "FullName").Value to the Music Store</a>
+            }
+            else
+            {
+                <a href="/Home" class="navbar-brand"><img src="~/Images/NavBar/bassTrebleHeart.jpg" alt="Music Store Logo" alt="free use image from https://ayoqq.org/explore/bass-drawing-treble-clef-heart/" height="30" width="30">  Welcome to the Music Store</a>
+            }
+
             <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -31,19 +44,7 @@
                     <a href="#" class="nav-link">Deals & Sales</a>
                 </li>
                 <li class="navbar-item">
-                    <a href="#" class="nav-link">Stringed Instruments</a>
-                </li>
-                <li class="navbar-item">
-                    <a href="#" class="nav-link">Purcussion Instruments</a>
-                </li>
-                <li class="navbar-item">
-                    <a href="#" class="nav-link">Brass Instruments</a>
-                </li>
-                <li class="navbar-item">
-                    <a href="#" class="nav-link">Wind Instruments</a>
-                </li>
-                <li class="navbar-item">
-                    <a href="#" class="nav-link">Pianos & Keyboards</a>
+                    <a href="#" class="nav-link">Music Instruments</a>
                 </li>
                 <li class="navbar-item">
                     <a href="#" class="nav-link">Books & Videos</a>
@@ -51,12 +52,25 @@
                 <li class="navbar-item">
                     <a href="#" class="nav-link">Accessors & Novalty</a>
                 </li>
-                <li class="navbar-item">
-                    <a href="/Account/Login" class="nav-link">Login</a>
-                </li>
-                <li class="navbar-item">
-                    <a href="/Account/Register" class="nav-link">New User?</a>
-                </li>
+                @if (signInManager.IsSignedIn(User))
+                {
+                    <li class="navbar-item">
+                        <a href="#" class="nav-link">View Cart</a>
+                    </li>
+                    <li class="navbar-item">
+                        <a href="#" class="nav-link">Log Out</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="navbar-item">
+                        <a href="/Account/Login" class="nav-link">Login</a>
+                    </li>
+                    <li class="navbar-item">
+                        <a href="/Account/Register" class="nav-link">New User?</a>
+                    </li>
+                }
+
             </ul>
         </nav>
     </header>
