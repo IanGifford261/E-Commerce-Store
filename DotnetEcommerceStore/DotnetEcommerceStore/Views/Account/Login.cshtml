@@ -1,11 +1,15 @@
 ﻿@model DotnetEcommerceStore.Models.ViewModels.LoginViewModel
+
 @{
+    Layout = "_Layout";
     ViewData["Title"] = "Login";
 }
+<link rel="stylesheet" href="~/Styles/Account.css" />
+<link rel="stylesheet" href="~/Styles/Login.css" />
 
 <h1>Login</h1>
 
-<form method="post">
+<form method="post" id="loginform">
     <div asp-validation-summary="All" class="text-primary"></div>
 
     <label asp-for="Email"></label>
