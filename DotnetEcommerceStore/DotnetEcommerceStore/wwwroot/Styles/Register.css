@@ -1,6 +1,9 @@
 ﻿body {
-    top: 60vh;
+    background: url(../Images/Background/RegBackground.jpg) no-repeat center center fixed; /*background image is free-for-personal-use from http://clipart-library.com/clipart/yikrGenMT.htm */
+    background-size: cover;
+    color: moccasin;
 }
+
 
 #regform {
     top: 40vh;

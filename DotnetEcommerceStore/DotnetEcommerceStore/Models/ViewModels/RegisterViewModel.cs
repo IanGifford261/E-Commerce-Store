@@ -11,15 +11,20 @@ namespace DotnetEcommerceStore.Models.ViewModels
         [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
+
         [Required]
-        [Display(Name = "First Name")]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
         [Required]
+        [EmailAddress]
         public string Email { get; set; }
+
         [Required]
         [DataType(DataType.Password)]
         [StringLength(20, ErrorMessage = "The {0} must be at least {2}, and a max of {1} characters long", MinimumLength = 6)]
         public string Password { get; set; }
+
         [Required]
         [Display(Name = "Confirm Password")]
         [DataType(DataType.Password)]

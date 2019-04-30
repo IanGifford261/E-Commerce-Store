@@ -50,14 +50,15 @@ namespace DotnetEcommerceStore.Controllers
                 {
                     Email = registerViewModel.Email,
                     FirstName = registerViewModel.FirstName,
-                    LastName = registerViewModel.LastName
+                    LastName = registerViewModel.LastName,
+                    UserName = registerViewModel.Email
                 };
 
                 var result = await _userManager.CreateAsync(user, registerViewModel.Password);
 
                 if (result.Succeeded)
                 {
-                    Claim nameClaim = new Claim("Full Name", $"{user.FirstName} {user.LastName}");
+                    Claim nameClaim = new Claim("FullName", $"{user.FirstName} {user.LastName}");
 
                     Claim email = new Claim(ClaimTypes.Email, user.Email, ClaimValueTypes.Email);
 
@@ -66,6 +67,8 @@ namespace DotnetEcommerceStore.Controllers
                     await _userManager.AddClaimsAsync(user, claims);
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
+
+                    return RedirectToAction("Index", "Home");
                 }
             }
 
