@@ -19,11 +19,7 @@ namespace DotnetEcommerceStore.Models.ViewModels
         [Required]
         [Display(Name = "Favorite Instrument")]
         public string FavInstrument { get; set; }
-
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Favorite Instrument")]
-        public string FavInstrument { get; set; }
+        
         [Required]
         [EmailAddress]
         public string Email { get; set; }
