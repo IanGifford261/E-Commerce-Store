@@ -13,6 +13,8 @@ using DotnetEcommerceStore.Data;
 using DotnetEcommerceStore.Models;
 using DotnetEcommerceStore.Models.Services;
 using DotnetEcommerceStore.Models.Interfaces;
+using DotnetEcommerceStore.Models.Handlers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DotnetEcommerceStore
 {
@@ -46,13 +48,17 @@ namespace DotnetEcommerceStore
                 : Configuration["ConnectionStrings:ProductionApplicationDb"];
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(conUsers));
-            
-
-            services.AddScoped<IInventory, InventoryService>();
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Professional Musician", policy => policy.Requirements.Add(new ProMusicianRequirment(true)));
+            });
+
+            services.AddScoped<IInventory, InventoryService>();
+            services.AddScoped<IAuthorizationHandler, ProMusicianHandler>();
 
         }
 

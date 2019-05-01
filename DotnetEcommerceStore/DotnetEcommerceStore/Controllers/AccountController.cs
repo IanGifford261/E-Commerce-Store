@@ -64,7 +64,7 @@ namespace DotnetEcommerceStore.Controllers
 
                     Claim favInst = new Claim("Favorite Instrument", $"{user.FavInstrument}");
 
-                    Claim proMusician = new Claim("Professional Musician", $"{user.ProMusician}");
+                    Claim proMusician = new Claim("Professional Musician", user.ProMusician.ToString());
                     
                     List<Claim> claims = new List<Claim> { nameClaim, email, favInst };
             

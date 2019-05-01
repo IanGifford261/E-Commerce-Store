@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace DotnetEcommerceStore.Models.Handlers
 {
-    public class ProMusicianRequirment : AuthorizationHandler<ProMusicianRequirment>, IAuthorizationRequirement
+    public class ProMusicianRequirment : IAuthorizationRequirement
     {
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, ProMusicianRequirment requirement)
+        public bool Musician;
+
+        public ProMusicianRequirment(bool musician)
         {
-            throw new NotImplementedException();
+            Musician = musician;
         }
+
     }
 }
