@@ -9,7 +9,7 @@
 ------------------------------
 
 ## Description
-This C# program is a mock e-commerce site.  
+This C# web application that represents the functionality of an ECommerce store online
 
 ------------------------------
 
@@ -33,21 +33,23 @@ Then select and open ``` EComerce.sln ```
 
 
 ##### Application Start
-![Image 1](Assets/HomePage.PNG)
+![Image 1]()
 
 
 ------------------------------
 
 ## Change Log
-
-
-
+V 1.0.0 *Initialization* 22APR2019
+V 1.0.1 *MVC Scaffoded out, Basic Functionality complete* 23APR2019
+V 1.0.2 *AZURE Databases live and seeded* 24APR2019
+V 1.1.0 *Identity, Claims, and policies being built out* 29APR2019
+V 1.1.1 *Custom policies implemented* 01MAY2019
 
 ------------------------------
 ## Collaborators, Contributors, and Other Resources used
 
 ### Collaborators
-
+Jason Burns, Andrew Curtis, Daniel Logerstedt, Chris Morton, Tanner Percival
 ### Contributors
 Michael Kelly
 Ian Gifford
@@ -70,7 +72,6 @@ TODO: Guide users through getting your code up and running on their own system. 
 1.	Installation process
 2.	Software dependencies
 3.	Latest releases
-4.	API references
 
 # Build and Test
 TODO: Describe and show how to build your code and run the tests. 
@@ -78,7 +79,3 @@ TODO: Describe and show how to build your code and run the tests.
 # Contribute
 TODO: Explain how other users and developers can contribute to make your code better. 
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://www.visualstudio.com/en-us/docs/git/create-a-readme). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
