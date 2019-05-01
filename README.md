@@ -33,7 +33,7 @@ Then select and open ``` EComerce.sln ```
 
 
 ##### Application Start
-![Image 1]()
+![Image 1](/Assets/Splash.png)
 
 
 ------------------------------
