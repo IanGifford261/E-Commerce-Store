@@ -57,11 +57,11 @@ Then select and open ``` EComerce.sln ```
 ------------------------------
 
 ## Change Log
-V 1.0.0 *Initialization* 22APR2019
-V 1.0.1 *MVC Scaffoded out, Basic Functionality complete* 23APR2019
-V 1.0.2 *AZURE Databases live and seeded* 24APR2019
-V 1.1.0 *Identity, Claims, and policies being built out* 29APR2019
-V 1.1.1 *Custom policies implemented* 01MAY2019
+- V 1.0.0 *Initialization* 22APR2019
+- V 1.0.1 *MVC Scaffoded out, Basic Functionality complete* 23APR2019
+- V 1.0.2 *AZURE Databases live and seeded* 24APR2019
+- V 1.1.0 *Identity, Claims, and policies being built out* 29APR2019
+- V 1.1.1 *Custom policies implemented* 01MAY2019
 
 ------------------------------
 ## Collaborators, and Other Resources used
