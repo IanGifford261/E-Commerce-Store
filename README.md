@@ -1,23 +1,38 @@
-# E-Commerce Store
-
 ------------------------------
 
 # E-Commerce Store
-#### E-Commerce Store
-##### *Authors: Ian Gifford & Mike Kelly*
+
+##### *Authors*
+- [Ian *"Hype Man"* Gifford](https://github.com/IanGifford261)
+
+- [Michael *"The Wizard"* Kelly](https://github.com/Michael-S-Kelly)
 
 ------------------------------
-
+# Introduction 
 ## Description
-This C# web application that represents the functionality of an ECommerce store online
+This C# web application that represents the functionality of an ECommerce store online, using a login feature, register feature, inventory viewing/purchasing, a shopping cart view, and a transaction view.
 
+```
+What is the product you are selling?
+Our Ecommerce store currently sells musical instruments and has a special section for musicians of a professional level!
+
+What claims are you capturing? Where? Why?
+A users' favorite instrument (because who wouldn't want to share that!) 
+and a checkbox that is a boolean that captures whether or not you(the user) are a professional musician, which will grant access to our special deals page(TBD on the release, 
+still under development)
+
+What Policies are you enforcing? Where? Why? Directions on how to test.
+A policy we are enforcing currently is whether or not you are a musiscian, which will determine whether or not you gain access to our "musicians page" that will grant special 
+deals for working musicians.
+In order to test, You must create a new user. Before final creation, there is a checkbox for "professional musician". 
+Once checked,  should be able to click "Musician" in the nav-bar and depending on what you selected (checked the checkbox or not), you will be granted accessto the page.
+
+Link to deployed website
+https://dotnetecommercestore.azurewebsites.net/
+```
 ------------------------------
+# Getting Started
 
-## Getting Started
-Clone this repository to your local machine.
-```
-$ git clone [https://github.com/Michael-S-Kelly/]
-```
 #### To run the program from Visual Studio:
 Select ```File``` -> ```Open``` -> ```Project/Solution```
 
@@ -33,8 +48,11 @@ Then select and open ``` EComerce.sln ```
 
 
 ##### Application Start
-![Image 1]()
+![Image 1](/Assets/Splash.png =550x)
 
+![Image 2](/Assets/login.png =550x)
+
+![Image 3](/Assets/register.png =550x)
 
 ------------------------------
 
@@ -46,36 +64,29 @@ V 1.1.0 *Identity, Claims, and policies being built out* 29APR2019
 V 1.1.1 *Custom policies implemented* 01MAY2019
 
 ------------------------------
-## Collaborators, Contributors, and Other Resources used
+## Collaborators, and Other Resources used
 
 ### Collaborators
 Jason Burns, Andrew Curtis, Daniel Logerstedt, Chris Morton, Tanner Percival
-### Contributors
-Michael Kelly
-Ian Gifford
 
+### Libraries/API's/Dev environments-Dev Tools
+
+- [X] VS Community
+
+- [X] Azure/DevOps
+
+- [X] MVC Framework with Entity
+
+- [X] XUnit Testing
+
+- [X] Bootstrap CSS
 
 ### Other Resources
+
 #### Microsoft Visual C# Step by Step Ninth Edition
 #### C# 7.0 in a Nutshell
 #### C# Pocket Reference
 #### C# and .NET Core Test-Driven Development
 
 ------------------------------
-For more information on Markdown: https://www.markdownguide.org/cheat-sheet
-
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
-
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
-
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
 
