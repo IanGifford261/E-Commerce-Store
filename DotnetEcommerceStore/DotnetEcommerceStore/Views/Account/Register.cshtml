@@ -12,7 +12,7 @@
 <h1>Register</h1>
 
 <div class="regform">
-    <form method="post" >
+    <form method="post">
 
         <div asp-validation-summary="All" class="text-primary"></div>
         <div class="form-group">
@@ -40,6 +40,12 @@
             <span asp-validation-for="FavInstrument" class="text-primary"></span>
         </div>
 
+        <div class="form-group">
+            <label asp-for="ProMusician"></label>
+            <input asp-for="ProMusician" />
+            <span asp-validation-for="ProMusician" class="text-primary"></span>
+        </div>
+        
         <div class="form-group">
             <label asp-for="Password"></label>
             <input asp-for="Password" />
