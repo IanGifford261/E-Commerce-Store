@@ -11,36 +11,57 @@
 
 <h1>Register</h1>
 
-<form method="post" id="regform">
-    <div asp-validation-summary="All" class="text-primary"></div>
+<div class="regform">
+    <form method="post">
 
-    <label asp-for="Email"></label>
-    <input asp-for="Email" />
-    <span asp-validation-for="Email" class="text-primary"></span>
+        <div asp-validation-summary="All" class="text-primary"></div>
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" />
+            <span asp-validation-for="Email" class="text-primary"></span>
+        </div>
 
-    <label asp-for="FirstName"></label>
-    <input asp-for="FirstName" />
-    <span asp-validation-for="FirstName" class="text-primary"></span>
+        <div class="form-group">
+            <label asp-for="FirstName"></label>
+            <input asp-for="FirstName" />
+            <span asp-validation-for="FirstName" class="text-primary"></span>
+        </div>
 
-    <label asp-for="LastName"></label>
-    <input asp-for="LastName" />
-    <span asp-validation-for="LastName" class="text-primary"></span>
 
-    <label asp-for="FavInstrument"></label>
-    <input asp-for="FavInstrument" />
-    <span asp-validation-for="FavInstrument" class="text-primary"></span>
+        <div class="form-group">
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" />
+            <span asp-validation-for="LastName" class="text-primary"></span>
+        </div>
 
-    <label asp-for="ProMusician"></label>
-    <input asp-for="ProMusician" />
-    <span asp-validation-for="ProMusician" class="text-primary"></span>
+        <div class="form-group">
+            <label asp-for="FavInstrument"></label>
+            <input asp-for="FavInstrument" />
+            <span asp-validation-for="FavInstrument" class="text-primary"></span>
+        </div>
 
-    <label asp-for="Password"></label>
-    <input asp-for="Password" />
-    <span asp-validation-for="Password" class="text-primary"></span>
+        <div class="form-group">
+            <label asp-for="ProMusician"></label>
+            <input asp-for="ProMusician" />
+            <span asp-validation-for="ProMusician" class="text-primary"></span>
+        </div>
+        
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" />
+            <span asp-validation-for="Password" class="text-primary"></span>
+        </div>
 
-    <label asp-for="ConfirmPassword"></label>
-    <input asp-for="ConfirmPassword" />
-    <span asp-validation-for="ConfirmPassword" class="text-primary"></span>
-  
-    <button type="submit">Register</button>
-</form>
+        <div class="form-group">
+            <label asp-for="ConfirmPassword"></label>
+            <input asp-for="ConfirmPassword" />
+            <span asp-validation-for="ConfirmPassword" class="text-primary"></span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit">Register</button>
+        </div>
+
+    </form>
+</div>
+
