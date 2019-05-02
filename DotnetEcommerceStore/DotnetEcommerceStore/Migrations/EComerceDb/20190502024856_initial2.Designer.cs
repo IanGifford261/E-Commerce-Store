@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotnetEcommerceStore.Migrations.EComerceDb
 {
     [DbContext(typeof(EComerceDbContext))]
-    [Migration("20190429002702_seed")]
-    partial class seed
+    [Migration("20190502024856_initial2")]
+    partial class initial2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

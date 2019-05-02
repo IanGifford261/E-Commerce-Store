@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotnetEcommerceStore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190430163805_ian")]
-    partial class ian
+    [Migration("20190502024803_initial1")]
+    partial class initial1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,6 +57,8 @@ namespace DotnetEcommerceStore.Migrations
                     b.Property<string>("PhoneNumber");
 
                     b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<bool>("ProMusician");
 
                     b.Property<string>("SecurityStamp");
 
