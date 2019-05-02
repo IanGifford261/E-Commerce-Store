@@ -1,15 +1,31 @@
-﻿@{
+﻿@model IEnumerable<DotnetEcommerceStore.Models.Product>
+@using DotnetEcommerceStore.Models.Interfaces
+@inject IInventory InventoryService
+
+@{
     Layout = "_Layout";
 }
 <link rel="stylesheet" href="~/Styles/HomeIndex.css" />
 
+@{ 
+    var products = await InventoryService.GetProductList();
+}
 
-<div id="test">
-    <div>
-        <p>Hello Nate and Amanda from Ian and Mike!!</p>
-    </div>
-    <div>
-        <p>It runs....Yaay!!!!</p>
-    </div>
+<div class="salesblock">
+    @foreach (var product in products)
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-lg-2">
+                    <div class="card">
+                        <div class="card-header">@product.Name</div>
+                        <div class="card-body"><img src="~/Images/Products/Placeholder.png" /></div>
+                        <div class="card-body">@product.Description</div>
+                        <div class="card-footer">$ @product.Price</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
 
