@@ -64,8 +64,10 @@ namespace DotnetEcommerceStore.Controllers
 
                     Claim favInst = new Claim("Favorite Instrument", $"{user.FavInstrument}");
 
-                    List<Claim> claims = new List<Claim> { nameClaim, email };
-
+                    Claim proMusician = new Claim("Professional Musician", user.ProMusician.ToString());
+                    
+                    List<Claim> claims = new List<Claim> { nameClaim, email, favInst };
+            
                     await _userManager.AddClaimsAsync(user, claims);
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
