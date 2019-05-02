@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DotnetEcommerceStore.Migrations
 {
-    public partial class seed : Migration
+    public partial class initial1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,7 +42,9 @@ namespace DotnetEcommerceStore.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true)
+                    LastName = table.Column<string>(nullable: true),
+                    FavInstrument = table.Column<string>(nullable: true),
+                    ProMusician = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

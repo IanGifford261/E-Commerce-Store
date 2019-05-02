@@ -56,6 +56,8 @@ namespace DotnetEcommerceStore.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
+                    b.Property<bool>("ProMusician");
+
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
