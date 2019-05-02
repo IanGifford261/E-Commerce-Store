@@ -1,0 +1,13 @@
+﻿body {
+    background: url(../Images/Background/HomePageBackground.jpg) no-repeat center center fixed; /*background image is free-use from https://www.vecteezy.com/vector-art/115312-free-music-background-vector */
+    background-size: cover;
+    color: moccasin;
+}
+
+main {
+    
+}
+
+.prodimage {
+    width: 10vh;
+}

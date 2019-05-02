@@ -10,5 +10,7 @@ namespace DotnetEcommerceStore.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string FavInstrument { get; set; }
+        public bool ProMusician { get; set; }
     }
 }
