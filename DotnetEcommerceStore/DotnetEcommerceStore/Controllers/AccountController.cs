@@ -66,7 +66,7 @@ namespace DotnetEcommerceStore.Controllers
 
                     Claim proMusician = new Claim("Professional Musician", user.ProMusician.ToString());
                     
-                    List<Claim> claims = new List<Claim> { nameClaim, email, favInst };
+                    List<Claim> claims = new List<Claim> { nameClaim, email, favInst, proMusician };
             
                     await _userManager.AddClaimsAsync(user, claims);
 
@@ -75,7 +75,6 @@ namespace DotnetEcommerceStore.Controllers
                     return RedirectToAction("Index", "Home");
                 }
             }
-
             return View(registerViewModel);
         }
 
