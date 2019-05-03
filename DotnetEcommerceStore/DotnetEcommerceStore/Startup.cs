@@ -37,15 +37,15 @@ namespace DotnetEcommerceStore
 
             // products
             var conProducts = Environment.IsDevelopment()
-                ? Configuration["ConnectionStrings:EComerceDbContext"]
-                : Configuration["ConnectionStrings:ProductionEComerceDbContext"];
+                ? Configuration["ConnectionStrings:ProductionEComerceDbContext"]
+                : Configuration["ConnectionStrings:EComerceDbContext"];
 
             services.AddDbContext<EComerceDbContext>(options => options.UseSqlServer(conProducts));
 
             // users
             var conUsers = Environment.IsDevelopment()
-                ? Configuration["ConnectionStrings:DefaultApplicationDb"]
-                : Configuration["ConnectionStrings:ProductionApplicationDb"];
+                ? Configuration["ConnectionStrings:ProductionApplicationDb"]
+                : Configuration["ConnectionStrings:DefaultApplicationDb"];
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(conUsers));
 
