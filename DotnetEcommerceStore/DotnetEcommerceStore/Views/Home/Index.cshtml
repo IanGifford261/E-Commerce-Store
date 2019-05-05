@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<DotnetEcommerceStore.Models.Product>
 @using DotnetEcommerceStore.Models.Interfaces
+@using Microsoft.AspNetCore.Identity
 @inject IInventory InventoryService
+@*@inject SignInManager<ApplicationUser> SignInManager*@
 
 @{
     Layout = "_Layout";
