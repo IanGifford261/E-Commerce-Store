@@ -6,15 +6,15 @@
 @inject SignInManager<ApplicationUser> signInManager
 
 @{
-    Layout = "_Layout";
+    ViewData["Title"] = "Index";
+    Layout = "_Layout.cshtml";
 }
-<link rel="stylesheet" href="~/Styles/HomeIndex.css" />
+
+<h1>Index</h1>
 
 @{
     var products = await InventoryService.GetProductList();
 }
-
-<h1>Featured Items</h1>
 
 <div class="salesblock">
     @foreach (var product in products)
@@ -27,8 +27,7 @@
                         <div class="card-body"><img src="~/Images/Products/Placeholder.png" class="prodimage" /></div>
                         <div class="card-body">@product.Description</div>
                         <div class="card-footer">$ @product.Price</div>
-                        @*<div class="card-footer"><button id="itemDetails" formaction="Details">View Details</button></div>*@
-                        <div class="card-footer"><button id="itemDetails" asp-action="Details" asp-route-id="@product.ID" type="submit" asp-controller="Product">View Details</button></div>
+                        <div class="card-footer"><button id="itemDetails" asp-action="Details" asp-route="@product.ID">View Details</button></div>
                         @if (signInManager.IsSignedIn(User))
                         {
                             <div class="card-footer"><button class="AddToBasket" type="button">Add to Basket</button></div>
@@ -44,4 +43,3 @@
         </div>
     }
 </div>
-
