@@ -90,5 +90,7 @@ Jason Burns, Andrew Curtis, Daniel Logerstedt, Chris Morton, Tanner Percival
 #### C# Pocket Reference
 #### C# and .NET Core Test-Driven Development
 
+#### https://www.youtube.com/user/ervis4824/videos
+
 ------------------------------
 
