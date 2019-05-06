@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using DotnetEcommerceStore.Models;
 using DotnetEcommerceStore.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -99,6 +100,14 @@ namespace DotnetEcommerceStore.Controllers
                 ModelState.AddModelError(string.Empty, "Invalid Login Information");
             }
             return View(lvm);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+
+            return RedirectToAction("Index", "Home");
         }
     } 
 }
