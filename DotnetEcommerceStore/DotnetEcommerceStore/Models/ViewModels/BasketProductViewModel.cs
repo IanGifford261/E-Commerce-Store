@@ -9,7 +9,7 @@ namespace DotnetEcommerceStore.Models.ViewModels
 {
     public class BasketProductViewModel
     {
-        public int BasketID { get; set; }
+        public int CartID { get; set; }
         public int ProductID { get; set; }
         public string Name { get; set; }
         public string SKU { get; set; }
@@ -20,5 +20,6 @@ namespace DotnetEcommerceStore.Models.ViewModels
         public decimal Price { get; set; }
         public decimal ProductTotal { get; set; }
         public decimal TotalCost { get; set; }
+        public Product Product { get; set; }
     }
 }
