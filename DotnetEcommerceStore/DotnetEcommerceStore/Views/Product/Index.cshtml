@@ -7,27 +7,32 @@
 
 @{
     Layout = "_Layout";
+    ViewData["Title"] = "Index";
 }
-<link rel="stylesheet" href="~/Styles/HomeIndex.css" />
+
+<link rel="stylesheet" href="~/Styles/StyleSheet.css" />
+<link rel="stylesheet" href="~/Styles/product.css" />
+<link rel="stylesheet" href="~/Styles/productIndex.css" />
+
+<h1>Index</h1>
 
 @{
     var products = await InventoryService.GetProductList();
 }
-
-<h1 class="marginTop">Featured Items</h1>
 
 <div class="salesblock">
     @foreach (var product in products)
     {
         <div class="container">
             <div class="row">
-                <div class="col-sm-4 col-md-4 col-lg-4">
+                <div class="col-sm-6 col-md-4 col-lg-2">
                     <div class="card">
                         <div class="card-header">@product.Name</div>
                         <div class="card-body"><img src="~/Images/Products/Placeholder.png" class="prodimage" /></div>
                         <div class="card-body">@product.Description</div>
                         <div class="card-footer">$ @product.Price</div>
-                        <div class="card-footer"><a id="itemDetails" asp-controller="Product" asp-route-id="@product.ID" asp-action="Details"  >View Details</a></div>
+                        <div class="card-footer"><a id="itemDetails" asp-controller="Product" asp-route-id="@product.ID" asp-action="Details">View Details</a></div>
+                    </div>
                         @if (signInManager.IsSignedIn(User))
                         {
                             <div class="card-footer"><button class="AddToBasket" type="button">Add to Basket</button></div>
@@ -36,11 +41,8 @@
                         {
                             <div class="card-footer"><button onclick="location.href='/Account/Login'">Login to Add to Basket</button></div>
                         }
-
-                    </div>
                 </div>
             </div>
         </div>
     }
 </div>
-
