@@ -28,7 +28,7 @@ namespace DotnetEcommerceStore.Controllers
         {
             _inventory = inventory;
             _cart = cart;
-            _cartItems = _cartItems;
+            _cartItems = cartItems;
             _userManager = userManager;
             _signInManager = signInManager;
         }

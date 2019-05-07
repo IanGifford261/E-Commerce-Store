@@ -1,3 +1,12 @@
-﻿main {
-    /*top: 20vw;*/
+﻿#cartButton{
+    margin-right: 2vh;
 }
+
+nav{
+    margin-bottom: 10%;
+}
+
+.marginTop{
+    margin-top: 5%;
+}
+
