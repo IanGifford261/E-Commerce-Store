@@ -9,7 +9,7 @@ namespace DotnetEcommerceStore.Models
     {
         public int CartID { get; set; }
         public string UserID { get; set; }
-
-        public List<CartItems> cartItems { get; set; }
+        public decimal Price { get; set; }
+        public List<CartItems> CartItems { get; set; }
 }
 }

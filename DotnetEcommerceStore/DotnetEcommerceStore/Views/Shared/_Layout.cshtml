@@ -43,6 +43,7 @@
                 <li class="navbar-item">
                     <a asp-controller="Product" asp-action="Index" class="nav-link">Products</a>
                 </li>
+
                 @if (signInManager.IsSignedIn(User))
                 {
                     <li class="navbar-item">
@@ -55,7 +56,6 @@
                         <a class="nav-link" asp-controller="Account" asp-action="Logout">Log Out</a>
                     </li>
                 }
-                
 
                 else
                 {
