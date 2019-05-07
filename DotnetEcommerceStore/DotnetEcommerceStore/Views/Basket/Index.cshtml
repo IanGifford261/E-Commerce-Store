@@ -1,4 +1,10 @@
-﻿@model IEnumerable<DotnetEcommerceStore.Models.BasketItem>
+﻿@model DotnetEcommerceStore.Models.Cart
+@{
+    ViewData["Title"] = "CartView";
+}
+
+<h1>CartView</h1>
+
 
 <body>
     @if (Model.Count() < 1)
@@ -20,4 +26,3 @@
 
 
 </body>
-

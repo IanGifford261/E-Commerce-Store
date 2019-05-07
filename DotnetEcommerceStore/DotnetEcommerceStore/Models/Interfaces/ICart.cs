@@ -15,5 +15,7 @@ namespace DotnetEcommerceStore.Models.Interfaces
         Task<Cart> GetCartByID(string id);
 
         Task<Cart> UpdateCart(Cart cart);
+
+        //Task UpdateCartAsync(Cart cart);
     }
 }
