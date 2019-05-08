@@ -14,21 +14,20 @@
     var products = await InventoryService.GetProductList();
 }
 
-<h1>Featured Items</h1>
+<h1 class="marginTop">Featured Items</h1>
 
 <div class="salesblock">
     @foreach (var product in products)
     {
         <div class="container">
             <div class="row">
-                <div class="col-sm-6 col-md-4 col-lg-2">
+                <div class="col-sm-4 col-md-4 col-lg-4">
                     <div class="card">
                         <div class="card-header">@product.Name</div>
                         <div class="card-body"><img src="~/Images/Products/Placeholder.png" class="prodimage" /></div>
                         <div class="card-body">@product.Description</div>
                         <div class="card-footer">$ @product.Price</div>
-                        @*<div class="card-footer"><button id="itemDetails" formaction="Details">View Details</button></div>*@
-                        <div class="card-footer"><button id="itemDetails" asp-action="Details" asp-route-id="@product.ID" type="submit" asp-controller="Product">View Details</button></div>
+                        <div class="card-footer"><a id="itemDetails" asp-controller="Product" asp-route-id="@product.ID" asp-action="Details"  >View Details</a></div>
                         @if (signInManager.IsSignedIn(User))
                         {
                             <div class="card-footer"><button class="AddToBasket" type="button">Add to Basket</button></div>

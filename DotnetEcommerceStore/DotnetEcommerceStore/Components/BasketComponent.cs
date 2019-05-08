@@ -1,5 +1,6 @@
 ﻿using DotnetEcommerceStore.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +20,9 @@ namespace DotnetEcommerceStore.Components
 
         public async Task<IViewComponentResult> InvokeAsync(int number)
         {
-            var basket = _context.Products.OrderByDescending(x => x.ID)
+            var basket = await _context.Products.OrderByDescending(x => x.ID)
                                                 .Take(number)
-                                                .ToList();
+                                                .ToListAsync();
             return View(basket);
         }
     }
