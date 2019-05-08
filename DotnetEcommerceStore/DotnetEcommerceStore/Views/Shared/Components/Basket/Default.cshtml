@@ -1,4 +1,4 @@
-﻿@*@model IEnumerable<DotnetEcommerceStore.Models.Cart>
+﻿@model IEnumerable<DotnetEcommerceStore.Models.Cart>
 
 <!DOCTYPE html>
 <html>
@@ -16,7 +16,7 @@
                 
                 <form asp-action="Add" asp-controller="BasketController" method="post">
                 <div asp-validation-summary="ModelOnly"></div>
-                <input type="hidden" asp-for="@item.Cart" value="@item.CartItems" />
+                <input type="hidden" asp-for="@item.CartItemID" value="@item.CartItems" />
 
                 <button type="submit">Update Cart</button>
                 </form>
@@ -26,4 +26,4 @@
     </section>
 </body>
 
-</html>*@
+</html>

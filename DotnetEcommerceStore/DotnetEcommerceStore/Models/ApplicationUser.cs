@@ -13,4 +13,6 @@ namespace DotnetEcommerceStore.Models
         public string FavInstrument { get; set; }
         public bool ProMusician { get; set; }
     }
+
+    //public class 
 }
