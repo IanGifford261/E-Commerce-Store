@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using DotnetEcommerceStore.Models;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,16 +22,16 @@ namespace DotnetEcommerceStore
                 var services = scope.ServiceProvider;
                 try
                 {
-                    RoleInitializer.SeedData(services);
+                   RoleInitializer.SeedData(services);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
 
                     throw;
                 }
+                host.Run();
             }
         }
-
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)

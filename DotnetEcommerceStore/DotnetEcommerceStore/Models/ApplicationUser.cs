@@ -14,5 +14,9 @@ namespace DotnetEcommerceStore.Models
         public bool ProMusician { get; set; }
     }
 
-    //public class 
+    public class ApplicationRoles
+    {
+        public const string Admin = "Admin";
+        public const string Member = "Member";
+    }
 }
