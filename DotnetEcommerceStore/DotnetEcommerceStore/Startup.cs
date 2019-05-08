@@ -109,19 +109,4 @@ namespace DotnetEcommerceStore
         }
     }
 }
-/*
---Code from origional ConfigureServices  just in case--
- 
-services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultApplicationDb")));
 
-            services.AddDbContext<EComerceDbContext>(options => 
-            options.UseSqlServer(Configuration.GetConnectionString("ProductionEComerceDb")));
-
-            services.AddScoped<IInventory, InventoryService>();
-
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-
-*/
