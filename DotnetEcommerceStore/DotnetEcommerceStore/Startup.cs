@@ -63,7 +63,9 @@ namespace DotnetEcommerceStore
 
             services.AddScoped<IInventory, InventoryService>();
             services.AddScoped<IAuthorizationHandler, ProMusicianHandler>();
-            services.AddScoped<ICart, CartService>();
+            services.AddTransient<ICart, CartService>();
+            services.AddTransient<ICartItems, CartItemService>();
+            services.AddTransient<ICheckout, CheckoutService>();
 
 
             //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -102,10 +104,7 @@ namespace DotnetEcommerceStore
 
             app.UseStaticFiles();
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+           
         }
     }
 }

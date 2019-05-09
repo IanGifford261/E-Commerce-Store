@@ -17,6 +17,14 @@ namespace DotnetEcommerceStore.Controllers
         private readonly ICheckout _checkout;
         private UserManager<ApplicationUser> _userManager;
 
+        public CheckoutController(ICart cart, ICartItems cartItems, ICheckout checkout, UserManager<ApplicationUser> userManager)
+        {
+            _cart = cart;
+            _cartItems = cartItems;
+            _checkout = checkout;
+            _userManager = userManager;
+        }
+
         [Authorize]
         public IActionResult Checkout()
         {

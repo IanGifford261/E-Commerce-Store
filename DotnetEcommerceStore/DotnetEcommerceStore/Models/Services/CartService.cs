@@ -14,7 +14,7 @@ namespace DotnetEcommerceStore.Models.Services
 {
     public class CartService : ICart
     {
-        private readonly EComerceDbContext _cart;
+        private readonly EComerceDbContext _context;
 
         /// <summary>
         /// Connects Class to the database
@@ -22,7 +22,7 @@ namespace DotnetEcommerceStore.Models.Services
         /// <param name="cart">store database</param>
         private CartService(EComerceDbContext cart)
         {
-            _cart = cart;
+            _context = cart;
         }
 
         /// <summary>
@@ -37,8 +37,8 @@ namespace DotnetEcommerceStore.Models.Services
                 UserID = user.Id
             };
 
-            await _cart.Cart.AddAsync(cart);
-            await _cart.SaveChangesAsync();
+            await _context.Cart.AddAsync(cart);
+            await _context.SaveChangesAsync();
             return HttpStatusCode.Created;
         }
 
@@ -49,7 +49,7 @@ namespace DotnetEcommerceStore.Models.Services
         /// <returns>Cart</returns>
         public async Task<Cart> GetCartByID(string id)
         {
-            var cart = await _cart.Cart.FirstOrDefaultAsync(u => u.UserID == id);
+            var cart = await _context.Cart.FirstOrDefaultAsync(u => u.UserID == id);
 
             return cart;
         }
@@ -61,8 +61,8 @@ namespace DotnetEcommerceStore.Models.Services
         /// <returns>Shopping Cart</returns>
         public async Task<Cart> UpdateCart(Cart cart)
         {
-            _cart.Cart.Update(cart);
-            await _cart.SaveChangesAsync();
+            _context.Cart.Update(cart);
+            await _context.SaveChangesAsync();
             return cart;
         }
     }

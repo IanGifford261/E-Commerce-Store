@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DotnetEcommerceStore.Controllers
 {
-    public class BasketController : Controller
+    public class CartController : Controller
     {
         private readonly IInventory _inventory;
         private readonly ICart _cart;
@@ -24,7 +24,7 @@ namespace DotnetEcommerceStore.Controllers
         /// <param name="cart">Cart Table</param>
         /// <param name="userManager">User Manager</param>
         /// <param name="signInManager">Sign-In Manager</param>
-        public BasketController(IInventory inventory, ICart cart, ICartItems cartItems, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public CartController(IInventory inventory, ICart cart, ICartItems cartItems, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _inventory = inventory;
             _cart = cart;
@@ -49,6 +49,42 @@ namespace DotnetEcommerceStore.Controllers
 
             return View(shoppingCart);
         }
+        /*
+        /// <summary>
+        /// (Post) Add an item to the Shopping Cart
+        /// </summary>
+        /// <param name="id">Inventory ID</param>
+        /// <param name="quantity">Quantity of Items to add</param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> AddToCart(int id)
+        {
+            string userName = User.Identity.Name;
+            var user = await _userManager.FindByEmailAsync(userName);
+            string UserID = user.Id;
+            var item = _inventory.GetProduct(id);
+            var cart = await _cart.GetCartByID(UserID);
+            if (cart != null)
+            {
+                await _cart.CreateCart(user);
+            }
+
+            var product = _cartItems.GetCartItemByID(id);
+
+            if (product != null)
+            {
+                //product.Quantity++;
+                await _cartItems.UpdateCartItem(id, product);
+            }
+            else
+            {
+                await _cartItems.AddCartItem(cart, product);
+            }
+
+
+            return RedirectToAction("Index", "Cart");
+        }
+        */
         
         /// <summary>
         /// (Post) Add an item to the Shopping Cart
@@ -77,8 +113,9 @@ namespace DotnetEcommerceStore.Controllers
             }
 
 
-            return RedirectToAction("Index", "Basket");
+            return RedirectToAction("Index", "Cart");
         } 
+        
 
         /// <summary>
         /// 

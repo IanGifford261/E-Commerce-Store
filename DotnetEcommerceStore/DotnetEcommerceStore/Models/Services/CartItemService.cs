@@ -43,7 +43,7 @@ namespace DotnetEcommerceStore.Models.Services
         /// <returns>Cart Item</returns>
         public async Task<CartItems> GetCartItemByID(int id)
         {
-            var cartItem = await _cartItems.CartItems.FindAsync(id);
+            var cartItem = await _cartItems.CartItems.FirstOrDefaultAsync(x => x.CartItemsID == id);
             cartItem.Product = await _cartItems.Products.FindAsync(cartItem.ProductID);
             return cartItem;
         }
