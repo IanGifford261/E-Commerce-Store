@@ -57,7 +57,7 @@ namespace DotnetEcommerceStore.Controllers
         /// <param name="quantity">Quantity of Items to add</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> AddToCart(int id, int quantity)
+        public async Task<IActionResult> AddToCart(int id)
         {
             string userName = User.Identity.Name;
             var user = await _userManager.FindByEmailAsync(userName);
@@ -68,7 +68,7 @@ namespace DotnetEcommerceStore.Controllers
 
             if (product != null)
             {
-                product.Quantity += quantity;
+                product.Quantity++;
                 await _cartItems.UpdateCartItem(id, product);
             }
             else

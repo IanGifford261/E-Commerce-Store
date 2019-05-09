@@ -30,7 +30,7 @@
                         <div class="card-footer"><a id="itemDetails" asp-controller="Product" asp-route-id="@product.ID" asp-action="Details"  >View Details</a></div>
                         @if (signInManager.IsSignedIn(User))
                         {
-                            <div class="card-footer"><button class="AddToBasket" asp-controller="Basket" asp-action="AddToCart" asp-route-ProductID="@product.ID" type="button">Add to Basket</button></div>
+                            <form class="card-footer" method="post" asp-controller="Basket" asp-action="AddToCart"><button class="AddToBasket" name="id" value ="@product.ID" type="submit">Add to Basket</button></form>
                         }
                         else
                         {
