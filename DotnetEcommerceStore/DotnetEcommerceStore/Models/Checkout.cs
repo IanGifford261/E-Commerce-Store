@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace DotnetEcommerceStore.Models
 {
-    public class Order
+    public class Checkout
     {
-        public int OrderID { get; set; }
+        public int CheckoutID { get; set; }
         public string UserID { get; set; }
-        public List<OrderItems> OrderItems { get; set; }
+        public List<CheckoutItems> OrderItems { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime PurchaseDate { get; set; }

@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace DotnetEcommerceStore.Models.Interfaces
 {
-    public interface IOrder
+    public interface ICheckout
     {
-        Task<Order> OrderCheckout(ApplicationUser user);
+        Task<Checkout> OrderCheckout(string userID);
+        Task AddPurchase(Checkout order, CartItems item);
     }
 }

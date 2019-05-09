@@ -104,5 +104,9 @@ namespace DotnetEcommerceStore.Data
         public DbSet<CartItems> CartItems { get; set; }
 
         public DbSet<Cart> Cart { get; set; }
+
+        public DbSet<Checkout> Checkout { get; set; }
+
+        public DbSet<CheckoutItems> CheckoutItems { get; set; }
     }
 }
