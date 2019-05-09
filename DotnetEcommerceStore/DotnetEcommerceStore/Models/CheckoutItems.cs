@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace DotnetEcommerceStore.Models
 {
-    public class OrderItems
+    public class CheckoutItems
     {
-        public int OrderItemsID { get; set; }
+        public int CheckoutItemsID { get; set; }
         public int OrderID { get; set; }
         public int ProductID { get; set; }
         public int Quantity { get; set; }
