@@ -41,17 +41,9 @@
                     <a href="/Home" class="nav-link">Featured Items</a>
                 </li>
                 <li class="navbar-item">
-                    <a href="#" class="nav-link">Deals & Sales</a>
+                    <a asp-controller="Product" asp-action="Index" class="nav-link">Products</a>
                 </li>
-                <li class="navbar-item">
-                    <a href="#" class="nav-link">Music Instruments</a>
-                </li>
-                <li class="navbar-item">
-                    <a href="#" class="nav-link">Books & Videos</a>
-                </li>
-                <li class="navbar-item">
-                    <a href="#" class="nav-link">Accessors & Novalty</a>
-                </li>
+
                 @if (signInManager.IsSignedIn(User))
                 {
                     <li class="navbar-item">
@@ -64,7 +56,6 @@
                         <a class="nav-link" asp-controller="Account" asp-action="Logout">Log Out</a>
                     </li>
                 }
-                
 
                 else
                 {

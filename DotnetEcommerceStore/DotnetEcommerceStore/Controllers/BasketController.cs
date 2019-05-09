@@ -28,7 +28,7 @@ namespace DotnetEcommerceStore.Controllers
         {
             _inventory = inventory;
             _cart = cart;
-            _cartItems = _cartItems;
+            _cartItems = cartItems;
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -57,7 +57,7 @@ namespace DotnetEcommerceStore.Controllers
         /// <param name="quantity">Quantity of Items to add</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> PlaceInCart(int id, int quantity)
+        public async Task<IActionResult> AddToCart(int id)
         {
             string userName = User.Identity.Name;
             var user = await _userManager.FindByEmailAsync(userName);
@@ -68,7 +68,7 @@ namespace DotnetEcommerceStore.Controllers
 
             if (product != null)
             {
-                product.Quantity += quantity;
+                product.Quantity++;
                 await _cartItems.UpdateCartItem(id, product);
             }
             else
@@ -77,7 +77,41 @@ namespace DotnetEcommerceStore.Controllers
             }
 
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Basket");
+        } 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="quantity"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> UpdateCartItem(int id, int quantity)
+        {
+            string userName = User.Identity.Name;
+            var user = await _userManager.FindByEmailAsync(userName);
+            string UserID = user.Id;
+            var cart = await _cart.GetCartByID(UserID);
+
+            CartItems cartItem = await _cartItems.GetCartItemByID(id);
+            cartItem.Quantity = quantity;
+            await _cartItems.UpdateCartItem(cartItem.CartID, cartItem);
+            return RedirectToAction("Index", "Basket");
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteCartItem(int id)
+        {
+            string userName = User.Identity.Name;
+            var user = await _userManager.FindByEmailAsync(userName);
+            string UserID = user.Id;
+            var cart = await _cart.GetCartByID(UserID);
+
+            CartItems cartItem = await _cartItems.GetCartItemByID(id);
+            await _cartItems.RemoveCartItem(id);
+            return RedirectToAction("Index", "Basket");
         }
     }
 }

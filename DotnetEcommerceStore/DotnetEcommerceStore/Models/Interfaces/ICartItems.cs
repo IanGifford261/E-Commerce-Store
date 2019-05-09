@@ -17,5 +17,6 @@ namespace DotnetEcommerceStore.Models.Interfaces
         Task<CartItems> UpdateCartItem(int id, CartItems cartItem);
 
         Task<HttpStatusCode> RemoveCartItem(int id);
+        
     }
 }
