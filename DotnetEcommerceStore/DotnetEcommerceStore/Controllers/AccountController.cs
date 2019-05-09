@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using DotnetEcommerceStore.Models;
 using DotnetEcommerceStore.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using SendGrid;
 
 namespace DotnetEcommerceStore.Controllers
 {
@@ -15,6 +18,7 @@ namespace DotnetEcommerceStore.Controllers
     {
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
+        private readonly IEmailSender _emailSender;
 
         /// <summary>
         /// Brings in the User Manager and the Sign-In Manager into the class
@@ -71,6 +75,20 @@ namespace DotnetEcommerceStore.Controllers
             
                     await _userManager.AddClaimsAsync(user, claims);
 
+                    if (registerViewModel.Email.ToLower() == "amanda@codefellows.com" || registerViewModel.Email.ToLower() ==  "ntibbals@outlook.com")
+                    {
+                        await _userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
+                    }
+
+                    await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
+
+                    //StringBuilder sb = new StringBuilder();
+                    //sb.AppendLine("<h1>Welcome to the Music Store!</h1>");
+                    //sb.AppendLine("Thank you for registering with our site. We appreciate your business.");
+                    //sb.AppendLine("Remember, Dont give your password to anyone");
+                    //sb.ToString();
+                    await _emailSender.SendEmailAsync(registerViewModel.Email, "Thank you for registering", "<p> Welcome to our Music Store </p>");
+
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
                     return RedirectToAction("Index", "Home");
@@ -108,5 +126,12 @@ namespace DotnetEcommerceStore.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-    } 
+    }
 }
+
+//StringBuilder sb = new StringBuilder();
+//sb.AppendLine("<h1>Welcome to the Music Store!</h1>");
+//sb.AppendLine("The Items that you have purchased are: <ul>");
+// Foreach loop over all the basket items.....                    sb.Append("<li>NAME OF ITEM and PRICE</li>");
+//sb.AppendLine("");
+//sb.ToString();

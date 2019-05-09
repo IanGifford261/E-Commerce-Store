@@ -1,14 +1,18 @@
-﻿@*@model IEnumerable<DotnetEcommerceStore.Models.CartItems>
+﻿@*@model IEnumerable<DotnetEcommerceStore.Models.Cart>
 
-@foreach (var item in Model)
-{
-    <div>
-        <form asp-action="Add" asp-controller="BasketController" method="post">
-        <div asp-validation-summary="ModelOnly"></div>
-        <input type="hidden" asp-for="@item.ProductID" value="@item.ProductID"
 
-        <button type="submit">Update Cart</button>
-        </form>
+<body>
+    <section style="border: 2px solid black">
+        Your Cart
 
-    </div>
-}*@
+        @foreach (var item in Model)
+        {
+            <div>
+                
+               
+
+            </div>
+        }
+    </section>
+</body>
+
