@@ -1,11 +1,6 @@
 ﻿@*@model IEnumerable<DotnetEcommerceStore.Models.Cart>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width"/>
-    <title>Mini Cart</title>
-</head>
+
 <body>
     <section style="border: 2px solid black">
         Your Cart
@@ -14,16 +9,10 @@
         {
             <div>
                 
-                <form asp-action="Add" asp-controller="BasketController" method="post">
-                <div asp-validation-summary="ModelOnly"></div>
-                <input type="hidden" asp-for="@item.CartItemID" value="@item.CartItems" />
-
-                <button type="submit">Update Cart</button>
-                </form>
+               
 
             </div>
         }
     </section>
 </body>
 
-</html>*@
