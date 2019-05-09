@@ -16,14 +16,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var line in Model.Cart.cartItems)
+            @foreach (var line in Model.Cart.CartItems)
             {
                 <tr>
                     <td>@line.Quantity</td>
                     <td>@line.Product.Name</td>
                     <td>@line.Product.Price</td>
                     <td>@((line.Quantity * line.Product.Price).ToString("c"))</td>
-                    <td><a asp-controller="Basket" asp-action="DeleteCartItem" asp-route-CartItemID="@line.ID"></a></td>
+                    <td><a asp-controller="Basket" asp-action="DeleteCartItem" asp-route-CartItemID="@line.CartItemsID"></a></td>
                 </tr>
             }
         </tbody>

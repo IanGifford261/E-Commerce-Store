@@ -18,6 +18,42 @@ namespace DotnetEcommerceStore.Migrations.EComerceDb
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("DotnetEcommerceStore.Models.Cart", b =>
+                {
+                    b.Property<int>("CartID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<string>("UserID");
+
+                    b.HasKey("CartID");
+
+                    b.ToTable("Cart");
+                });
+
+            modelBuilder.Entity("DotnetEcommerceStore.Models.CartItems", b =>
+                {
+                    b.Property<int>("CartItemsID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CartID");
+
+                    b.Property<int>("ProductID");
+
+                    b.Property<int>("Quantity");
+
+                    b.HasKey("CartItemsID");
+
+                    b.HasIndex("CartID");
+
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("CartItems");
+                });
+
             modelBuilder.Entity("DotnetEcommerceStore.Models.Product", b =>
                 {
                     b.Property<int>("ID")
@@ -117,6 +153,19 @@ namespace DotnetEcommerceStore.Migrations.EComerceDb
                             Price = 25m,
                             SKU = "987654321"
                         });
+                });
+
+            modelBuilder.Entity("DotnetEcommerceStore.Models.CartItems", b =>
+                {
+                    b.HasOne("DotnetEcommerceStore.Models.Cart", "Cart")
+                        .WithMany("CartItems")
+                        .HasForeignKey("CartID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DotnetEcommerceStore.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

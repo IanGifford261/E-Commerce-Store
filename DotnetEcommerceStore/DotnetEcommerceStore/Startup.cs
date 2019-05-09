@@ -63,7 +63,9 @@ namespace DotnetEcommerceStore
 
             services.AddScoped<IInventory, InventoryService>();
             services.AddScoped<IAuthorizationHandler, ProMusicianHandler>();
-            services.AddScoped<ICart, CartService>();
+            services.AddTransient<ICart, CartService>();
+            services.AddTransient<ICartItems, CartItemService>();
+            services.AddTransient<ICheckout, CheckoutService>();
 
 
             //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -102,26 +104,8 @@ namespace DotnetEcommerceStore
 
             app.UseStaticFiles();
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+           
         }
     }
 }
-/*
---Code from origional ConfigureServices  just in case--
- 
-services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultApplicationDb")));
 
-            services.AddDbContext<EComerceDbContext>(options => 
-            options.UseSqlServer(Configuration.GetConnectionString("ProductionEComerceDb")));
-
-            services.AddScoped<IInventory, InventoryService>();
-
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-
-*/
