@@ -15,6 +15,7 @@ using DotnetEcommerceStore.Models.Services;
 using DotnetEcommerceStore.Models.Interfaces;
 using DotnetEcommerceStore.Models.Handlers;
 using Microsoft.AspNetCore.Authorization;
+using CartService = DotnetEcommerceStore.Models.Services.CartService;
 
 namespace DotnetEcommerceStore
 {
@@ -34,6 +35,8 @@ namespace DotnetEcommerceStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
 
             // products
             var conProducts = Environment.IsDevelopment()
@@ -60,6 +63,15 @@ namespace DotnetEcommerceStore
 
             services.AddScoped<IInventory, InventoryService>();
             services.AddScoped<IAuthorizationHandler, ProMusicianHandler>();
+            services.AddTransient<ICart, CartService>();
+            services.AddTransient<ICartItems, CartItemService>();
+            services.AddTransient<ICheckout, CheckoutService>();
+
+
+            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.AddScoped(c => Models.CartService.GetCart(c));
+
+
 
         }
 
@@ -75,29 +87,25 @@ namespace DotnetEcommerceStore
 
             app.UseMvcWithDefaultRoute();
 
+            app.UseMvc(routes =>
+
+            {
+
+                routes.MapRoute(
+                name: "default",
+                template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                name: "details",
+                template: "product/details/{ID?}",
+                defaults: new { controller = "Product", action = "Details" });
+
+            });
 
             app.UseStaticFiles();
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+           
         }
     }
 }
-/*
---Code from origional ConfigureServices  just in case--
- 
-services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultApplicationDb")));
 
-            services.AddDbContext<EComerceDbContext>(options => 
-            options.UseSqlServer(Configuration.GetConnectionString("ProductionEComerceDb")));
-
-            services.AddScoped<IInventory, InventoryService>();
-
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-
-*/
