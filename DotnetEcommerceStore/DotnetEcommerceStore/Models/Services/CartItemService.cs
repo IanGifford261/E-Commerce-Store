@@ -28,9 +28,15 @@ namespace DotnetEcommerceStore.Models.Services
         /// <param name="cart">Shopping Cart</param>
         /// <param name="cartItem">Item to be added</param>
         /// <returns>Created (if successful)</returns>
-        public async Task<HttpStatusCode> AddCartItem(Cart cart, CartItems cartItem)
+        public async Task<HttpStatusCode> AddCartItem(int cartID, int id)
         {
-            cartItem.CartID = cart.CartID;
+            CartItems cartItem = new CartItems()
+            {
+                CartID = cartID,
+                ProductID = id,
+                Quantity = 1
+            };
+            
             await _cartItems.CartItems.AddAsync(cartItem);
             await _cartItems.SaveChangesAsync();
             return HttpStatusCode.Created;
@@ -43,8 +49,13 @@ namespace DotnetEcommerceStore.Models.Services
         /// <returns>Cart Item</returns>
         public async Task<CartItems> GetCartItemByID(int id)
         {
-            var cartItem = await _cartItems.CartItems.FirstOrDefaultAsync(x => x.CartItemsID == id);
+            var cartItem = await _cartItems.CartItems.FirstOrDefaultAsync(p => p.ProductID == id);
+            if (cartItem == null)
+            {
+                return null;
+            }
             cartItem.Product = await _cartItems.Products.FindAsync(cartItem.ProductID);
+
             return cartItem;
         }
 
