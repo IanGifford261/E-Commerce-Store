@@ -1,11 +1,12 @@
-@model DotnetEcommerceStore.Models.ViewModels.CartViewModel
-@*@model DotnetEcommerceStore.Models.Cart
-@model DotnetEcommerceStore.Models.CartItems*@
+@model List<DotnetEcommerceStore.Models.CartItems>
 @using DotnetEcommerceStore.Models.Interfaces
+@using DotnetEcommerceStore.Models.ViewModels
 
 @{
     Layout = "_Layout";
 }
+
+<link rel="stylesheet" href="~/Styles/Cart.css" />
 
 <div class="checkoutForm">
     <h2>Your Shopping Cart</h2>
@@ -19,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var line in Model.Cart.CartItems)
+            @foreach (var line in Model)
             {
                 <tr>
                     <td>@line.Quantity</td>
@@ -33,7 +34,7 @@
         <tfoot>
             <tr>
                 <td>Total:</td>
-                <td>@Model.CartTotal.ToString("c")</td>
+                <td>@*@Model.CartTotal.ToString("c")*@</td>
             </tr>
         </tfoot>
     </table>

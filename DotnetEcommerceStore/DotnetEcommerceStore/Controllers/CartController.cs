@@ -45,7 +45,7 @@ namespace DotnetEcommerceStore.Controllers
             string UserID = user.Id;
             var cart = await _cart.GetCartByID(UserID);
 
-            var shoppingCart = _cartItems.GetAllCartItems(cart.CartID);
+            var shoppingCart = await _cartItems.GetAllCartItems(cart.CartID);
 
             return View(shoppingCart);
         }
