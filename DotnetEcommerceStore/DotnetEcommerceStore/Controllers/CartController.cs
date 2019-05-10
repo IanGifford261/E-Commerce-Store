@@ -78,14 +78,14 @@ namespace DotnetEcommerceStore.Controllers
             }
             else
             {
-                await _cartItems.AddCartItem(cart, product);
+                await _cartItems.AddCartItem(cart, item);
             }
 
 
             return RedirectToAction("Index", "Cart");
         }
         */
-        
+
         /// <summary>
         /// (Post) Add an item to the Shopping Cart
         /// </summary>
@@ -109,11 +109,11 @@ namespace DotnetEcommerceStore.Controllers
             }
             else
             {
-                await _cartItems.AddCartItem(cart, product);
+                await _cartItems.AddCartItem(cart.CartID, id);
             }
 
 
-            return RedirectToAction("Index", "Cart");
+            return RedirectToAction("Index", "Product");
         } 
         
 

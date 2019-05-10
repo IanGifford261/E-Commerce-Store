@@ -14,15 +14,17 @@ namespace DotnetEcommerceStore.Models.Services
 {
     public class CartService : ICart
     {
-        private readonly EComerceDbContext _context;
+        private readonly EComerceDbContext _cart;
+        private readonly ApplicationDbContext _user;
 
         /// <summary>
         /// Connects Class to the database
         /// </summary>
         /// <param name="cart">store database</param>
-        private CartService(EComerceDbContext cart)
+        public CartService(EComerceDbContext cart, ApplicationDbContext user)
         {
-            _context = cart;
+            _cart = cart;
+            _user = user;
         }
 
         /// <summary>
@@ -30,15 +32,15 @@ namespace DotnetEcommerceStore.Models.Services
         /// </summary>
         /// <param name="user">Logged In User</param>
         /// <returns>Created (if successful)</returns>
-        public async Task<HttpStatusCode> CreateCart(ApplicationUser user)
+        public async Task<HttpStatusCode> CreateCart(string id)
         {
             Cart cart = new Cart()
             {
-                UserID = user.Id
+                UserID = id
             };
 
-            await _context.Cart.AddAsync(cart);
-            await _context.SaveChangesAsync();
+            await _cart.Cart.AddAsync(cart);
+            await _cart.SaveChangesAsync();
             return HttpStatusCode.Created;
         }
 
@@ -49,7 +51,15 @@ namespace DotnetEcommerceStore.Models.Services
         /// <returns>Cart</returns>
         public async Task<Cart> GetCartByID(string id)
         {
-            var cart = await _context.Cart.FirstOrDefaultAsync(u => u.UserID == id);
+
+            var cart = await _cart.Cart.FirstOrDefaultAsync(u => u.UserID == id);
+
+
+
+            if (cart == null)
+            {
+                await CreateCart(id);
+            }
 
             return cart;
         }
@@ -61,8 +71,8 @@ namespace DotnetEcommerceStore.Models.Services
         /// <returns>Shopping Cart</returns>
         public async Task<Cart> UpdateCart(Cart cart)
         {
-            _context.Cart.Update(cart);
-            await _context.SaveChangesAsync();
+            _cart.Cart.Update(cart);
+            await _cart.SaveChangesAsync();
             return cart;
         }
     }
