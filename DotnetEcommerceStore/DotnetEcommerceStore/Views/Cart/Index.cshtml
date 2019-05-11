@@ -27,7 +27,7 @@
                     <td>@line.Product.Name</td>
                     <td>@line.Product.Price</td>
                     <td>@((line.Quantity * line.Product.Price).ToString("c"))</td>
-                    <td><a asp-controller="Basket" asp-action="DeleteCartItem" asp-route-CartItemID="@line.CartItemsID"></a></td>
+                    <td><a asp-controller="Basket" asp-action="DeleteCartItem" asp-route-CartItemID="@line.CartItemsID">Delete Item</a></td>
                 </tr>
             }
         </tbody>
