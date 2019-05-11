@@ -17,6 +17,13 @@ namespace DotnetEcommerceStore.Controllers
         private readonly ICheckout _checkout;
         private UserManager<ApplicationUser> _userManager;
 
+        /// <summary>
+        /// Connects the injections to the controller
+        /// </summary>
+        /// <param name="cart">ICart</param>
+        /// <param name="cartItems">ICartItems</param>
+        /// <param name="checkout">ICheckout</param>
+        /// <param name="userManager">IUserManager</param>
         public CheckoutController(ICart cart, ICartItems cartItems, ICheckout checkout, UserManager<ApplicationUser> userManager)
         {
             _cart = cart;
@@ -25,12 +32,20 @@ namespace DotnetEcommerceStore.Controllers
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// View the checkout page
+        /// </summary>
+        /// <returns>Checkout View</returns>
         [Authorize]
         public IActionResult Checkout()
         {
             return View();
         }
 
+        /// <summary>
+        /// Controls the flow of the Checkout Process
+        /// </summary>
+        /// <param name="order">Order</param>
         [HttpPost]
         [Authorize]
         public async void Checkout(Checkout order)
@@ -55,11 +70,17 @@ namespace DotnetEcommerceStore.Controllers
             CheckoutReceipt();
         }
 
+        /// <summary>
+        /// Will confirm that the order is what the customer wants (may be removed because it might be duplicated)
+        /// </summary>
         public void ConfirmOrder()
         {
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void MakePayment()
         {
 

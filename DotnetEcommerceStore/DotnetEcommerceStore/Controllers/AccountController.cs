@@ -97,12 +97,21 @@ namespace DotnetEcommerceStore.Controllers
             return View(registerViewModel);
         }
 
+        /// <summary>
+        /// (Get) Gets the Login view
+        /// </summary>
+        /// <returns>Login View</returns>
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
+        /// <summary>
+        /// (Post) Loggs the User into the website
+        /// </summary>
+        /// <param name="lvm">Log View Model</param>
+        /// <returns>Logs into Site</returns>
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel lvm)
         {
@@ -119,6 +128,10 @@ namespace DotnetEcommerceStore.Controllers
             return View(lvm);
         }
 
+        /// <summary>
+        /// Logs the user off the site
+        /// </summary>
+        /// <returns>Home View</returns>
         [Authorize]
         public async Task<IActionResult> Logout()
         {
