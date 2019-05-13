@@ -100,20 +100,20 @@ namespace DotnetEcommerceStore.Models.Services
         /// <returns>OK (if successful)</returns>
         public int RemoveCartItem(CartItems product)
         {
-            var cartItem = _cartItems.CartItems.SingleOrDefault(p => p.CartItemsID == product.CartItemsID && p.CartID == CartID);
+            //var cartItem = _cartItems.CartItems.SingleOrDefault(p => p.CartItemsID == product.CartItemsID && p.CartID == CartID);
 
             int amount = 0;
 
-            if (cartItem != null)
+            if (product != null)
             {
-                if (cartItem.Quantity > 1)
+                if (product.Quantity > 1)
                 {
-                    cartItem.Quantity--;
-                    amount = cartItem.Quantity;
+                    product.Quantity--;
+                    amount = product.Quantity;
                 }
                 else
                 {
-                    _cartItems.CartItems.Remove(cartItem);
+                    _cartItems.CartItems.Remove(product);
                 }
             }
 

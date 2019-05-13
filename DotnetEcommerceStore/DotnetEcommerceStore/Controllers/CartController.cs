@@ -147,10 +147,9 @@ namespace DotnetEcommerceStore.Controllers
         {
             var deletProduct = await _cartItems.GetCartItemByID(productID);
 
-            if (deletProduct != null)
-            {
-                _cartItems.RemoveCartItem(deletProduct);
-            }
+            
+            _cartItems.RemoveCartItem(deletProduct);
+            
 
             return RedirectToAction("Index", "Cart");
         }
