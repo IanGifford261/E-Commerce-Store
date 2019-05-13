@@ -1,6 +1,9 @@
-@model List<DotnetEcommerceStore.Models.CartItems>
+@model IEnumerable<DotnetEcommerceStore.Models.CartItems>
 @using DotnetEcommerceStore.Models.Interfaces
-@using DotnetEcommerceStore.Models.ViewModels
+@inject IInventory InventoryService
+@using Microsoft.AspNetCore.Identity
+@using DotnetEcommerceStore.Models
+@inject SignInManager<ApplicationUser> signInManager
 
 @{
     Layout = "_Layout";
@@ -20,14 +23,18 @@
             </tr>
         </thead>
         <tbody>
+
             @foreach (var line in Model)
             {
                 <tr>
                     <td>@line.Quantity</td>
                     <td>@line.Product.Name</td>
-                    <td>@line.Product.Price</td>
+                    <td>@line.Product.Price.ToString("c")</td>
                     <td>@((line.Quantity * line.Product.Price).ToString("c"))</td>
-                    <td><a asp-controller="Basket" asp-action="DeleteCartItem" asp-route-CartItemID="@line.CartItemsID">Delete Item</a></td>
+                    <td>@line.CartItemsID</td>
+
+                    <td><form class="card-footer" method="post"><button class="AddToBasket"  asp-controller="Cart" asp-action="DeleteCartItem" value="@line.CartItemsID" name="productID" type="submit">Remove from Basket</button></form></td>
+
                 </tr>
             }
         </tbody>
@@ -42,3 +49,13 @@
         <a asp-controller="Order" asp-action="Checkout">Checkout</a>
     </div>
 </div>
+
+<td>
+    @* <form class="card-footer" method="post" asp-controller="Cart" asp-action="DeleteCartItem" asp-route-CartItemID="@line.CartItemsID"><button class="AddToBasket" name="id" value="@line.CartID" type="submit">Remove From Cart</button></form> *@
+
+    @* <a asp-controller="Cart" asp-action="DeleteCartItem" asp-route-CartItemID="@line.CartItemsID">Delete Item</a>  *@
+
+
+    @* <form class="card-footer"><button class="glyphicon-remove" method="post" asp-controller="Cart" asp-action="DeleteCartItem" asp-route-CartItemID="@line.CartItemsID">Delete</button></form>  *@
+
+    @* <a class="text-danger remove" asp-controller="Cart" asp-action="DeleteCartItem" asp-route="@line.Product.ID">Remove Item</a> *@

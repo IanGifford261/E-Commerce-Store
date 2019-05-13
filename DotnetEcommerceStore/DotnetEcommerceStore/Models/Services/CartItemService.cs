@@ -22,13 +22,16 @@ namespace DotnetEcommerceStore.Models.Services
             _cartItems = cartItems;
         }
 
+        public int CartID { get; set; }
+        public List<CartItems> CartItems { get; set; }
+
         /// <summary>
         /// (Create) Adds an Item to the Cart
         /// </summary>
         /// <param name="cart">Shopping Cart</param>
         /// <param name="cartItem">Item to be added</param>
         /// <returns>Created (if successful)</returns>
-        public async Task<HttpStatusCode> AddCartItem(int cartID, int id)
+        public async Task<HttpStatusCode> RemoveCartItem(int cartID, int id)
         {
             CartItems cartItem = new CartItems()
             {
@@ -95,13 +98,27 @@ namespace DotnetEcommerceStore.Models.Services
         /// </summary>
         /// <param name="id">Cart Item ID</param>
         /// <returns>OK (if successful)</returns>
-        public async Task<HttpStatusCode> RemoveCartItem(int id)
+        public int RemoveCartItem(CartItems product)
         {
-            var cartItem = await _cartItems.CartItems.FindAsync(id);
+            var cartItem = _cartItems.CartItems.SingleOrDefault(p => p.CartItemsID == product.CartItemsID && p.CartID == CartID);
 
-            _cartItems.CartItems.Remove(cartItem);
-            await _cartItems.SaveChangesAsync();
-            return HttpStatusCode.OK;
+            int amount = 0;
+
+            if (cartItem != null)
+            {
+                if (cartItem.Quantity > 1)
+                {
+                    cartItem.Quantity--;
+                    amount = cartItem.Quantity;
+                }
+                else
+                {
+                    _cartItems.CartItems.Remove(cartItem);
+                }
+            }
+
+            _cartItems.SaveChanges();
+            return amount;
         }
 
         /// <summary>
@@ -117,4 +134,20 @@ namespace DotnetEcommerceStore.Models.Services
             await _cartItems.SaveChangesAsync();
         }
     }
+
+    /*
+        /// <summary>
+        /// (Delete) Removes an item from the Shopping Cart
+        /// </summary>
+        /// <param name="id">Cart Item ID</param>
+        /// <returns>OK (if successful)</returns>
+        public async Task<HttpStatusCode> RemoveCartItem(CartItems cartItem)
+        {
+            //var cartItem = await _cartItems.CartItems.FirstOrDefaultAsync(ci => ci.CartItemsID == id);
+
+            _cartItems.CartItems.Remove(cartItem);
+            await _cartItems.SaveChangesAsync();
+            return HttpStatusCode.OK;
+        }
+    */
 }
