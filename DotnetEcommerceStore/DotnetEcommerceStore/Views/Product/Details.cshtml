@@ -17,6 +17,13 @@
 
 </div>
 
+<div>
+    @if (signInManager.IsSignedIn(User))
+    {
+        @await Component.InvokeAsync("Cart")
+    }
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-lg-2">

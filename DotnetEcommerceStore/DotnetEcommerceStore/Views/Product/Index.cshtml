@@ -19,6 +19,12 @@
 @{
     var products = await InventoryService.GetProductList();
 }
+<div>
+    @if (signInManager.IsSignedIn(User))
+    {
+        @await Component.InvokeAsync("Cart")
+    }
+</div>
 
 <div class="salesblock">
     @foreach (var product in products)
@@ -33,14 +39,14 @@
                         <div class="card-footer">$ @product.Price</div>
                         <div class="card-footer"><a id="itemDetails" asp-controller="Product" asp-route-id="@product.ID" asp-action="Details">View Details</a></div>
                     </div>
-                        @if (signInManager.IsSignedIn(User))
-                        {
-                            <div class="card-footer"><button class="AddToBasket" type="button">Add to Basket</button></div>
-                        }
-                        else
-                        {
-                            <div class="card-footer"><button onclick="location.href='/Account/Login'">Login to Add to Basket</button></div>
-                        }
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        <div class="card-footer"><button class="AddToBasket" type="button">Add to Basket</button></div>
+                    }
+                    else
+                    {
+                        <div class="card-footer"><button onclick="location.href='/Account/Login'">Login to Add to Basket</button></div>
+                    }
                 </div>
             </div>
         </div>
