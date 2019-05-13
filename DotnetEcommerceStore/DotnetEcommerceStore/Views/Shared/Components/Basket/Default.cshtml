@@ -1,2 +1,25 @@
-﻿
+﻿@model IEnumerable<DotnetEcommerceStore.Models.CartItems>
+@{
+    Layout = null;
+}
 
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Default</title>
+</head>
+
+<body>
+    <section style="border:2px solid grey">
+        Your Cart Items
+        @foreach(var item in Model)
+        {
+            <article>
+                <h2>@item.Product</h2>
+                <p>@item.Quantity</p>
+                <p></p>
+            </article>
+        }
+    </section>
+
+</body>

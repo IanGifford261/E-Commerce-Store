@@ -24,7 +24,7 @@ namespace DotnetEcommerceStore
         public IConfiguration Configuration { get; }
         public IHostingEnvironment Environment { get; }
 
-        public Startup(IHostingEnvironment environment)
+        public Startup(IConfiguration configuration, IHostingEnvironment environment)
         {
             Environment = environment;
             var builder = new ConfigurationBuilder().AddEnvironmentVariables();
@@ -35,9 +35,15 @@ namespace DotnetEcommerceStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddMemoryCache();
-            services.AddSession();
-
+            //services.AddMemoryCache();
+            //services.AddSession();
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                    .AddEntityFrameworkStores<ApplicationDbContext>()
+                    .AddDefaultTokenProviders();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Professional Musician", policy => policy.Requirements.Add(new ProMusicianRequirment(true)));
+            });
             // products
             var conProducts = Environment.IsDevelopment()
                 ? Configuration["ConnectionStrings:EComerceDbContext"]
@@ -51,15 +57,6 @@ namespace DotnetEcommerceStore
                 : Configuration["ConnectionStrings:ProductionApplicationDb"];
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(conUsers));
-
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("Professional Musician", policy => policy.Requirements.Add(new ProMusicianRequirment(true)));
-            });
 
             services.AddScoped<IInventory, InventoryService>();
             services.AddScoped<IAuthorizationHandler, ProMusicianHandler>();
@@ -85,7 +82,10 @@ namespace DotnetEcommerceStore
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvcWithDefaultRoute();
+            //app.UseMvcWithDefaultRoute();
+
+            app.UseMvc();
+            app.UseStaticFiles();
 
             app.UseMvc(routes =>
 
@@ -102,7 +102,6 @@ namespace DotnetEcommerceStore
 
             });
 
-            app.UseStaticFiles();
 
            
         }
