@@ -8,9 +8,9 @@ namespace DotnetEcommerceStore.Models
 {
     public class Checkout
     {
-        public int CheckoutID { get; set; }
+        public int ID { get; set; }
         public string UserID { get; set; }
-        public List<CheckoutItems> OrderItems { get; set; }
+        public List<CheckoutItems> CheckoutItems { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime PurchaseDate { get; set; }

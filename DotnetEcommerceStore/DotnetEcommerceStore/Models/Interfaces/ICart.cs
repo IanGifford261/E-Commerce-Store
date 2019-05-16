@@ -10,7 +10,7 @@ namespace DotnetEcommerceStore.Models.Interfaces
 {
     public interface ICart
     {
-        Task<HttpStatusCode> CreateCart(string id);
+        Task CreateCart(string id);
 
         Task<Cart> GetCartByID(string id);
 

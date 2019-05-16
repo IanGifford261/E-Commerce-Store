@@ -31,7 +31,7 @@ namespace DotnetEcommerceStore.Models.Services
         /// <param name="cart">Shopping Cart</param>
         /// <param name="cartItem">Item to be added</param>
         /// <returns>Created (if successful)</returns>
-        public async Task<HttpStatusCode> RemoveCartItem(int cartID, int id)
+        public async Task<HttpStatusCode> AddCartItem(int cartID, int id)
         {
             CartItems cartItem = new CartItems()
             {

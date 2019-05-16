@@ -16,6 +16,7 @@ using DotnetEcommerceStore.Models.Interfaces;
 using DotnetEcommerceStore.Models.Handlers;
 using Microsoft.AspNetCore.Authorization;
 using CartService = DotnetEcommerceStore.Models.Services.CartService;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace DotnetEcommerceStore
 {
@@ -60,9 +61,11 @@ namespace DotnetEcommerceStore
 
             services.AddScoped<IInventory, InventoryService>();
             services.AddScoped<IAuthorizationHandler, ProMusicianHandler>();
-            services.AddTransient<ICart, CartService>();
-            services.AddTransient<ICartItems, CartItemService>();
-            services.AddTransient<ICheckout, CheckoutService>();
+            services.AddScoped<ICart, CartService>();
+            services.AddScoped<ICartItems, CartItemService>();
+            services.AddScoped<ICheckout, CheckoutService>();
+
+            services.AddScoped<IEmailSender, EmailSender>();
 
 
             //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

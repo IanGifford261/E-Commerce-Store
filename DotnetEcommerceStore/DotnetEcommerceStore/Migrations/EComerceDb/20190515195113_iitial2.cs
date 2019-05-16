@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DotnetEcommerceStore.Migrations.EComerceDb
 {
-    public partial class initial2 : Migration
+    public partial class iitial2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,6 +20,21 @@ namespace DotnetEcommerceStore.Migrations.EComerceDb
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cart", x => x.CartID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Checkout",
+                columns: table => new
+                {
+                    CheckoutID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserID = table.Column<string>(nullable: true),
+                    PurchaseDate = table.Column<DateTime>(nullable: false),
+                    PurchaseTotal = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Checkout", x => x.CheckoutID);
                 });
 
             migrationBuilder.CreateTable(
@@ -64,6 +80,34 @@ namespace DotnetEcommerceStore.Migrations.EComerceDb
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CheckoutItems",
+                columns: table => new
+                {
+                    CheckoutItemsID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    OrderID = table.Column<int>(nullable: false),
+                    ProductID = table.Column<int>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
+                    CheckoutID = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CheckoutItems", x => x.CheckoutItemsID);
+                    table.ForeignKey(
+                        name: "FK_CheckoutItems_Checkout_CheckoutID",
+                        column: x => x.CheckoutID,
+                        principalTable: "Checkout",
+                        principalColumn: "CheckoutID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CheckoutItems_Products_ProductID",
+                        column: x => x.ProductID,
+                        principalTable: "Products",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "ID", "Description", "Name", "Price", "SKU" },
@@ -90,6 +134,16 @@ namespace DotnetEcommerceStore.Migrations.EComerceDb
                 name: "IX_CartItems_ProductID",
                 table: "CartItems",
                 column: "ProductID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CheckoutItems_CheckoutID",
+                table: "CheckoutItems",
+                column: "CheckoutID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CheckoutItems_ProductID",
+                table: "CheckoutItems",
+                column: "ProductID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -98,7 +152,13 @@ namespace DotnetEcommerceStore.Migrations.EComerceDb
                 name: "CartItems");
 
             migrationBuilder.DropTable(
+                name: "CheckoutItems");
+
+            migrationBuilder.DropTable(
                 name: "Cart");
+
+            migrationBuilder.DropTable(
+                name: "Checkout");
 
             migrationBuilder.DropTable(
                 name: "Products");

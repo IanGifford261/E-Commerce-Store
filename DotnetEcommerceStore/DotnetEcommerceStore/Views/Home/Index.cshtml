@@ -16,12 +16,12 @@
 
 <h1 class="marginTop">Featured Items</h1>
 
-<div>
+@*<div>
     @if (signInManager.IsSignedIn(User))
     {
         @await Component.InvokeAsync("Cart")
     }
-</div>
+</div>*@
 
 <div class="salesblock">
     @foreach (var product in products)
