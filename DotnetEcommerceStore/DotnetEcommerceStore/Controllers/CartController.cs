@@ -43,7 +43,7 @@ namespace DotnetEcommerceStore.Controllers
             string userName = User.Identity.Name;
             var user = await _userManager.FindByEmailAsync(userName);
             string UserID = user.Id;
-            var cart = await _cart.GetCartByID(UserID);
+            var cart = await _cart.GetCartByID(userName);
 
             var shoppingCart = await _cartItems.GetAllCartItems(cart.CartID);
 
@@ -98,7 +98,7 @@ namespace DotnetEcommerceStore.Controllers
             string userName = User.Identity.Name;
             var user = await _userManager.FindByEmailAsync(userName);
             string UserID = user.Id;
-            var cart = await _cart.GetCartByID(UserID);
+            var cart = await _cart.GetCartByID(userName);
 
             var product = await _cartItems.GetCartItemByID(id);
 
@@ -109,7 +109,7 @@ namespace DotnetEcommerceStore.Controllers
             }
             else
             {
-                await _cartItems.RemoveCartItem(cart.CartID, id);
+                await _cartItems.AddCartItem(cart.CartID, id);
             }
 
 

@@ -57,7 +57,7 @@ namespace DotnetEcommerceStore.Migrations.EComerceDb
 
             modelBuilder.Entity("DotnetEcommerceStore.Models.Checkout", b =>
                 {
-                    b.Property<int>("CheckoutID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -67,14 +67,14 @@ namespace DotnetEcommerceStore.Migrations.EComerceDb
 
                     b.Property<string>("UserID");
 
-                    b.HasKey("CheckoutID");
+                    b.HasKey("ID");
 
                     b.ToTable("Checkout");
                 });
 
             modelBuilder.Entity("DotnetEcommerceStore.Models.CheckoutItems", b =>
                 {
-                    b.Property<int>("CheckoutItemsID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -86,9 +86,11 @@ namespace DotnetEcommerceStore.Migrations.EComerceDb
 
                     b.Property<int>("Quantity");
 
-                    b.HasKey("CheckoutItemsID");
+                    b.HasKey("ID");
 
                     b.HasIndex("CheckoutID");
+
+                    b.HasIndex("ProductID");
 
                     b.ToTable("CheckoutItems");
                 });
@@ -209,9 +211,14 @@ namespace DotnetEcommerceStore.Migrations.EComerceDb
 
             modelBuilder.Entity("DotnetEcommerceStore.Models.CheckoutItems", b =>
                 {
-                    b.HasOne("DotnetEcommerceStore.Models.Checkout")
-                        .WithMany("OrderItems")
+                    b.HasOne("DotnetEcommerceStore.Models.Checkout", "Checkout")
+                        .WithMany("CheckoutItems")
                         .HasForeignKey("CheckoutID");
+
+                    b.HasOne("DotnetEcommerceStore.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -34,7 +34,7 @@
                 <div class="card-footer">$   @Html.DisplayFor(model => model.Price)</div>
                 @if (signInManager.IsSignedIn(User))
                 {
-                    <form class="card-footer" method="post" asp-controller="Cart" asp-action="AddToCart"><button class="AddToBasket" name="id" value="@Model.ID" type="submit">Add to Basket</button></form>
+                    <form class="card-footer" method="post" asp-controller="Cart" asp-action="AddToCart"><button class="AddToBasket" name="id" value="@User.Identity.Name" type="submit">Add to Basket</button></form>
                 }
                 else
                 {

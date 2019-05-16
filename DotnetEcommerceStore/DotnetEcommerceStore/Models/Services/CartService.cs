@@ -32,7 +32,7 @@ namespace DotnetEcommerceStore.Models.Services
         /// </summary>
         /// <param name="user">Logged In User</param>
         /// <returns>Created (if successful)</returns>
-        public async Task<HttpStatusCode> CreateCart(string id)
+        public async Task CreateCart(string id)
         {
             Cart cart = new Cart()
             {
@@ -41,7 +41,7 @@ namespace DotnetEcommerceStore.Models.Services
 
             await _cart.Cart.AddAsync(cart);
             await _cart.SaveChangesAsync();
-            return HttpStatusCode.Created;
+            //return HttpStatusCode.Created;
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace DotnetEcommerceStore.Models.Services
         public async Task<Cart> GetCartByID(string id)
         {
 
-            var cart = await _cart.Cart.FirstOrDefaultAsync(u => u.UserID == id);
+            Cart cart = await _cart.Cart.FirstOrDefaultAsync(u => u.UserID == id);
 
 
 
