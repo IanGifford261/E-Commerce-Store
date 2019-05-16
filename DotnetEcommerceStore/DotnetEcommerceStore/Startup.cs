@@ -44,6 +44,7 @@ namespace DotnetEcommerceStore
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("Professional Musician", policy => policy.Requirements.Add(new ProMusicianRequirment(true)));
+                options.AddPolicy("Admin Access", policy => policy.RequireRole(ApplicationRoles.Admin));
             });
             // products
             var conProducts = Environment.IsDevelopment()

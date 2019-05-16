@@ -1,0 +1,12 @@
+﻿@page
+@model DotnetEcommerceStore.Pages.Admin.AdminDashboardModel
+@using Microsoft.AspNetCore.Identity
+@using DotnetEcommerceStore.Models
+@inject SignInManager<ApplicationUser> _signInManager
+@{
+    ViewData["Title"] = "AdminDashboard";
+}
+
+<h2>Hi world</h2>
+@*<h1>Admin Dashboard for @User.Claims.First(name => name.Type == "FirstName").Value!</h1>*@
+
