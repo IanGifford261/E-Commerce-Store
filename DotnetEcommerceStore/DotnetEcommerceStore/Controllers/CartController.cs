@@ -43,9 +43,9 @@ namespace DotnetEcommerceStore.Controllers
             string userName = User.Identity.Name;
             var user = await _userManager.FindByEmailAsync(userName);
             string UserID = user.Id;
-            var cart = await _cart.GetCartByID(UserID);
+            var cart = await _cart.GetCartByID(userName);
 
-            var shoppingCart = _cartItems.GetAllCartItems(cart.CartID);
+            var shoppingCart = await _cartItems.GetAllCartItems(cart.CartID);
 
             return View(shoppingCart);
         }
@@ -78,14 +78,14 @@ namespace DotnetEcommerceStore.Controllers
             }
             else
             {
-                await _cartItems.AddCartItem(cart, product);
+                await _cartItems.AddCartItem(cart, item);
             }
 
 
             return RedirectToAction("Index", "Cart");
         }
         */
-        
+
         /// <summary>
         /// (Post) Add an item to the Shopping Cart
         /// </summary>
@@ -98,7 +98,7 @@ namespace DotnetEcommerceStore.Controllers
             string userName = User.Identity.Name;
             var user = await _userManager.FindByEmailAsync(userName);
             string UserID = user.Id;
-            var cart = await _cart.GetCartByID(UserID);
+            var cart = await _cart.GetCartByID(userName);
 
             var product = await _cartItems.GetCartItemByID(id);
 
@@ -109,11 +109,11 @@ namespace DotnetEcommerceStore.Controllers
             }
             else
             {
-                await _cartItems.AddCartItem(cart, product);
+                await _cartItems.AddCartItem(cart.CartID, id);
             }
 
 
-            return RedirectToAction("Index", "Cart");
+            return RedirectToAction("Index", "Product");
         } 
         
 
@@ -137,7 +137,28 @@ namespace DotnetEcommerceStore.Controllers
             return RedirectToAction("Index", "Basket");
         }
 
+        /// <summary>
+        /// (Post) Remove a Cart Item from the Cart
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Cart View</returns>
+        [HttpPost]
+        public async Task<IActionResult> DeleteCartItem(int productID)
+        {
+            var deletProduct = await _cartItems.GetCartItemByID(productID);
 
+            
+            _cartItems.RemoveCartItem(deletProduct);
+            
+
+            return RedirectToAction("Index", "Cart");
+        }
+        /*
+        /// <summary>
+        /// (Post) Remove a Cart Item from the Cart
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Cart View</returns>
         [HttpPost]
         public async Task<IActionResult> DeleteCartItem(int id)
         {
@@ -148,7 +169,55 @@ namespace DotnetEcommerceStore.Controllers
 
             CartItems cartItem = await _cartItems.GetCartItemByID(id);
             await _cartItems.RemoveCartItem(id);
-            return RedirectToAction("Index", "Basket");
+            return RedirectToAction("Index", "Cart");
         }
+
+        /// <summary>
+        /// (Post) Remove a Cart Item from the Cart
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Cart View</returns>
+        [HttpPost]
+        public async Task<IActionResult> DeleteCartItem(CartItems cartItems)
+        {
+            string userName = User.Identity.Name;
+            var user = await _userManager.FindByEmailAsync(userName);
+            string UserID = user.Id;
+            var cart = await _cart.GetCartByID(UserID);
+
+            //var product = await _cartItems.GetCartItemByID(id);
+
+            if (cartItems.Quantity > 1)
+            {
+                cartItems.Quantity--;
+                await _cartItems.UpdateCartItem(cartItems.CartItemsID, cartItems);
+            }
+            else
+            {
+                await _cartItems.RemoveCartItem(cartItems);
+            }
+
+
+            return RedirectToAction("Index", "Product");
+        }
+
+        /// <summary>
+        /// (Post) Remove a Cart Item from the Cart
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Cart View</returns>
+        [HttpPost]
+        public async Task<IActionResult> DeleteCartItem(int productID)
+        {
+            var deletProduct = await _inventory.GetProduct(productID);
+
+            if (deletProduct != null)
+            {
+                _cartItems.RemoveCartItem(deletProduct);
+            }
+
+            return RedirectToAction("Index", "Cart");
+        }
+        */
     }
 }

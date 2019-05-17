@@ -1,0 +1,27 @@
+﻿@page "{id}"
+@model DotnetEcommerceStore.Pages.Admin.ProductManagement.ProductManagementModel
+@{
+    ViewData["Title"] = "ProductManagement";
+    Layout = "_Layout";
+}
+
+<h1>Product Management</h1>
+<form class="data-form" method="post">
+    <input type="hidden" asp-for="Product.ID" value="@Model.Product.ID" />
+    <div>
+        <label asp-for="Product.Name">Product Name</label>
+        <input asp-for="Product.Name" value="@Model.Product.Name" />
+    </div>
+    <div>
+        <label asp-for="Product.SKU">Product SKU</label>
+        <input asp-for="Product.SKU" value="@Model.Product.SKU" />
+    </div>
+    <div>
+        <label asp-for="Product.Description">Product Description</label>
+        <input asp-for="Product.Description" value="@Model.Product.Description" />
+    </div>
+    <div>
+        <label asp-for="Product.Price">Product Price</label>
+        <input asp-for="Product.Price" value="@Model.Product.Price" />
+    </div>
+</form>

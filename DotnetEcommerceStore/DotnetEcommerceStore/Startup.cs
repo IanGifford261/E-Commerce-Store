@@ -16,6 +16,7 @@ using DotnetEcommerceStore.Models.Interfaces;
 using DotnetEcommerceStore.Models.Handlers;
 using Microsoft.AspNetCore.Authorization;
 using CartService = DotnetEcommerceStore.Models.Services.CartService;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace DotnetEcommerceStore
 {
@@ -24,7 +25,7 @@ namespace DotnetEcommerceStore
         public IConfiguration Configuration { get; }
         public IHostingEnvironment Environment { get; }
 
-        public Startup(IHostingEnvironment environment)
+        public Startup(IConfiguration configuration, IHostingEnvironment environment)
         {
             Environment = environment;
             var builder = new ConfigurationBuilder().AddEnvironmentVariables();
@@ -35,9 +36,16 @@ namespace DotnetEcommerceStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddMemoryCache();
-            services.AddSession();
-
+            //services.AddMemoryCache();
+            //services.AddSession();
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                    .AddEntityFrameworkStores<ApplicationDbContext>()
+                    .AddDefaultTokenProviders();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Professional Musician", policy => policy.Requirements.Add(new ProMusicianRequirment(true)));
+                options.AddPolicy("Admin Access", policy => policy.RequireRole(ApplicationRoles.Admin));
+            });
             // products
             var conProducts = Environment.IsDevelopment()
                 ? Configuration["ConnectionStrings:EComerceDbContext"]
@@ -52,27 +60,17 @@ namespace DotnetEcommerceStore
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(conUsers));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("Professional Musician", policy => policy.Requirements.Add(new ProMusicianRequirment(true)));
-            });
-
             services.AddScoped<IInventory, InventoryService>();
             services.AddScoped<IAuthorizationHandler, ProMusicianHandler>();
-            services.AddTransient<ICart, CartService>();
-            services.AddTransient<ICartItems, CartItemService>();
-            services.AddTransient<ICheckout, CheckoutService>();
+            services.AddScoped<ICart, CartService>();
+            services.AddScoped<ICartItems, CartItemService>();
+            services.AddScoped<ICheckout, CheckoutService>();
+
+            services.AddScoped<IEmailSender, EmailSender>();
 
 
             //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //services.AddScoped(c => Models.CartService.GetCart(c));
-
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,7 +83,10 @@ namespace DotnetEcommerceStore
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvcWithDefaultRoute();
+            //app.UseMvcWithDefaultRoute();
+
+            app.UseMvc();
+            app.UseStaticFiles();
 
             app.UseMvc(routes =>
 
@@ -102,7 +103,6 @@ namespace DotnetEcommerceStore
 
             });
 
-            app.UseStaticFiles();
 
            
         }

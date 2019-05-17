@@ -13,6 +13,7 @@ namespace DotnetEcommerceStore.Models
         public int ProductID { get; set; }
         [Range(0, 20, ErrorMessage = "Please Enter A Desired Purchase Quantity between 0 and 20.")]
         public int Quantity { get; set; }
+
         public Cart Cart { get; set; }
         public Product Product { get; set; }
 

@@ -75,21 +75,30 @@ namespace DotnetEcommerceStore.Controllers
             
                     await _userManager.AddClaimsAsync(user, claims);
 
-                    if (registerViewModel.Email.ToLower() == "amanda@codefellows.com" || registerViewModel.Email.ToLower() ==  "ntibbals@outlook.com")
+                    if (registerViewModel.Email.ToLower() == "amanda@codefellows.com" || registerViewModel.Email.ToLower() ==  "ntibbals@outlook.com" || registerViewModel.Email.ToLower() == "lightyagamie10@gmail.com" || registerViewModel.Email.ToLower() == "mike.s.kelly@icloud.com" || registerViewModel.Email.ToLower() == "admin@musicstore.com")
                     {
                         await _userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
                     }
-
                     await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
+                    
 
                     //StringBuilder sb = new StringBuilder();
                     //sb.AppendLine("<h1>Welcome to the Music Store!</h1>");
                     //sb.AppendLine("Thank you for registering with our site. We appreciate your business.");
                     //sb.AppendLine("Remember, Dont give your password to anyone");
                     //sb.ToString();
-                    await _emailSender.SendEmailAsync(registerViewModel.Email, "Thank you for registering", "<p> Welcome to our Music Store </p>");
+
+                    //await _emailSender.SendEmailAsync(registerViewModel.Email, "Thank you for registering", "<p> Welcome to our Music Store </p>");
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
+                    //if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
+                    //{
+                    //    return RedirectToPage("/Admin/AdminDasboard");
+                    //}
+                    //if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Member))
+                    //{
+                    //    return RedirectToAction("Index", "Home");
+                    //};
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -97,12 +106,21 @@ namespace DotnetEcommerceStore.Controllers
             return View(registerViewModel);
         }
 
+        /// <summary>
+        /// (Get) Gets the Login view
+        /// </summary>
+        /// <returns>Login View</returns>
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
+        /// <summary>
+        /// (Post) Loggs the User into the website
+        /// </summary>
+        /// <param name="lvm">Log View Model</param>
+        /// <returns>Logs into Site</returns>
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel lvm)
         {
@@ -111,14 +129,25 @@ namespace DotnetEcommerceStore.Controllers
                 var result = await _signInManager.PasswordSignInAsync(lvm.Email, lvm.Password, false, false);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
-                }
-
-                ModelState.AddModelError(string.Empty, "Invalid Login Information");
+                    var user = await _userManager.FindByEmailAsync(lvm.Email);
+                    if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
+                    {
+                        return RedirectToPage("/Admin/AdminDashboard");
+                    };
+                    if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Member))
+                    {
+                        return RedirectToAction("Index", "Home");
+                    };
+            }
+                ModelState.AddModelError(string.Empty, "Invalid Login Information");             
             }
             return View(lvm);
         }
 
+        /// <summary>
+        /// Logs the user off the site
+        /// </summary>
+        /// <returns>Home View</returns>
         [Authorize]
         public async Task<IActionResult> Logout()
         {

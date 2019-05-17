@@ -1,0 +1,59 @@
+﻿body {
+
+}
+
+main {
+    position: relative;
+    top: 10vh;
+    left: 5vh;
+}
+
+#form-contain{
+
+    top: 10vh;
+}
+
+.form-group{
+    position: relative;
+}
+
+.label{
+
+}
+
+.input{
+
+}
+
+.text-box{
+
+}
+
+.FirstName {
+    top: 10vh;
+    left: 0vh;
+}
+.LastName {
+    top: 18vh;
+    left: -17vw;
+}
+
+.Address {
+    top: 25vh;
+    left: -33vw;
+}
+
+.City {
+    top: 32vh;
+    left: -111vh;
+}
+
+.ZipCode {
+    top: 38vh;
+    left: -63vw;
+}
+
+.submit {
+    top: 40vh;
+    left: 18vw;
+}

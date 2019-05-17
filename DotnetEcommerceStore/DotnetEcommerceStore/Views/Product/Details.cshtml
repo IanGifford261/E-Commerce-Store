@@ -17,6 +17,13 @@
 
 </div>
 
+<div>
+    @if (signInManager.IsSignedIn(User))
+    {
+        @await Component.InvokeAsync("Cart")
+    }
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-lg-2">
@@ -27,7 +34,7 @@
                 <div class="card-footer">$   @Html.DisplayFor(model => model.Price)</div>
                 @if (signInManager.IsSignedIn(User))
                 {
-                    <div class="card-footer"><button class="AddToBasket" type="button">Add to Basket</button></div>
+                    <form class="card-footer" method="post" asp-controller="Cart" asp-action="AddToCart"><button class="AddToBasket" name="id" value="@User.Identity.Name" type="submit">Add to Basket</button></form>
                 }
                 else
                 {

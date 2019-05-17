@@ -44,17 +44,26 @@
                     <a asp-controller="Product" asp-action="Index" class="nav-link">Products</a>
                 </li>
 
+                @if (signInManager.IsSignedIn(User) && User.IsInRole(ApplicationRoles.Admin))
+                {
+                    <li class="navbar-item">
+                        <a class="nav-link" href="/Admin/AdminDashboard" >Admin Dashboard</a>
+                    </li>                    
+                }
+
                 @if (signInManager.IsSignedIn(User))
                 {
                     <li class="navbar-item">
-                        <a href="#" class="nav-link">Professional Muicians</a>
+                        <a href="#" class="nav-link">Professional Musicians</a>
                     </li>
                     <li class="navbar-item">
-                        <a class="nav-link" asp-controller="Basket" asp-action="Index">View Cart</a>
+                        <a class="nav-link" asp-controller="Cart" asp-action="Index">View Cart</a>
                     </li>
+
                     <li class="navbar-item">
                         <a class="nav-link" asp-controller="Account" asp-action="Logout">Log Out</a>
                     </li>
+
                 }
 
                 else

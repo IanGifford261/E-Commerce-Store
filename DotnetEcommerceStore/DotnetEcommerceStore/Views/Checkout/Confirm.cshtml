@@ -1,0 +1,78 @@
+﻿@model IEnumerable<DotnetEcommerceStore.Models.CheckoutItems>
+@using DotnetEcommerceStore.Models.Interfaces
+@inject IInventory InventoryService
+@using Microsoft.AspNetCore.Identity
+@using DotnetEcommerceStore.Models
+@inject SignInManager<ApplicationUser> signInManager
+
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Confirm";
+
+    decimal total = 0;
+}
+
+<link rel="stylesheet" href="~/Styles/StyleSheet.css" />
+<link rel="stylesheet" href="~/Styles/Checkout.css" />
+<link rel="stylesheet" href="~/Styles/Confirm.css" />
+
+<h1>Confirm</h1>
+
+<div class="checkoutForm">
+    <h2>Please Confirm Your Order</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Quantity</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var line in Model)
+            {
+                <tr>
+                    <td>@line.Quantity</td>
+                    <td>@line.Product.Name</td>
+                    <td>@line.Product.Price.ToString("c")</td>
+                    <td>@((line.Quantity * line.Product.Price).ToString("c"))</td>
+                    @{
+                        total = total + (line.Quantity * line.Product.Price);
+                    }
+
+                    @*<td><form class="card-footer" method="post"><button class="AddToBasket" asp-controller="Cart" asp-action="DeleteCartItem" value="@line.ID" name="userID" type="submit">Remove from Order</button></form></td>*@
+
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Total:</td>
+
+                <td>
+                    @total.ToString("c")
+                </td>
+            </tr>
+
+        </tfoot>
+        <tfoot>
+
+        </tfoot>
+
+    </table>
+
+    <a asp-controller="Checkout" asp-action="Billing">Payment Info</a>
+
+    @*<form class="card-footer" method="post"><button class="AddToBasket" asp-controller="Checkout" asp-action="Confirm" value="@User.Identity.Name" name="userID" type="submit">Process Order</button></form>*@
+
+    @*<form class="card-footer" method="post"><button class="AddToBasket" asp-controller="Checkout" asp-action="Billing" value="@User.Identity.Name" name="userID" type="submit">Payment Info</button></form>*@
+
+    @*<form asp-controller="Checkout" asp-action="Billing">
+            <input type="hidden" name="userID" value="@User.Identity.Name" method="Post" />
+            <button class="AddToBasket" type="submit">Payment Info</button>
+        </form>*@
+
+</div>

@@ -8,7 +8,7 @@ namespace DotnetEcommerceStore.Models.Interfaces
 {
     public interface ICartItems
     {
-        Task<HttpStatusCode> AddCartItem(Cart cart, CartItems cartItem);
+        Task<HttpStatusCode> AddCartItem(int cartID, int id);
 
         Task<CartItems> GetCartItemByID(int id);
 
@@ -16,7 +16,12 @@ namespace DotnetEcommerceStore.Models.Interfaces
 
         Task<CartItems> UpdateCartItem(int id, CartItems cartItem);
 
-        Task<HttpStatusCode> RemoveCartItem(int id);
-        
+        //Task<HttpStatusCode> RemoveCartItem(CartItems cartItem);
+
+        int RemoveCartItem(CartItems product);
+
+
+
+
     }
 }

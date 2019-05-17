@@ -1,0 +1,46 @@
+﻿@model DotnetEcommerceStore.Models.ViewModels.PaymentViewModel
+
+
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Billing";
+    
+}
+
+<link rel="stylesheet" href="~/Styles/StyleSheet.css" />
+<link rel="stylesheet" href="~/Styles/Checkout.css" />
+<link rel="stylesheet" href="~/Styles/Billing.css" />
+
+
+<div id="form-contain">
+    <form asp-action="MakePayment">
+        <div class="form-group" asp-validation-summary="ModelOnly"></div>
+
+        <input asp-for="UserID" typeof="hidden" name="userID" value="@User.Identity.Name" id="input" />
+
+        <label class="form-group label FirstName" asp-for="FirstName"></label>
+        <input class="form-group input FirstName" asp-for="FirstName" id="input" />
+        <span class="form-group text-box FirstName" asp-validation-for="FirstName"></span>
+
+        <label class="form-group label LastName" asp-for="LastName"></label>
+        <input class="form-group input LastName" asp-for="LastName" id="input" />
+        <span class="form-group text-box LastName" asp-validation-for="LastName"></span>
+
+        <label class="form-group label Address" asp-for="Address"></label>
+        <input class="form-group input Address" asp-for="Address" id="input" />
+        <span class="form-group text-box Address" asp-validation-for="Address"></span>
+
+        <label class="form-group label City" asp-for="City"></label>
+        <input class="form-group input City" asp-for="City" id="input" />
+        <span class="form-group text-box City" asp-validation-for="City"></span>
+
+        <label class="form-group label ZipCode" asp-for="ZipCode"></label>
+        <input class="form-group input ZipCode" asp-for="ZipCode" id="input" />
+        <span class="form-group text-box ZipCode" asp-validation-for="ZipCode"></span>
+
+        <div class="form-group">
+            <input class="form-group submit" type="submit" value="Make Payement" id="button" />
+        </div>
+    </form>
+</div>

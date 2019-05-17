@@ -16,6 +16,13 @@
 
 <h1 class="marginTop">Featured Items</h1>
 
+@*<div>
+    @if (signInManager.IsSignedIn(User))
+    {
+        @await Component.InvokeAsync("Cart")
+    }
+</div>*@
+
 <div class="salesblock">
     @foreach (var product in products)
     {
@@ -27,6 +34,7 @@
                         <div class="card-body"><img src="~/Images/Products/Placeholder.png" class="prodimage" /></div>
                         <div class="card-body">@product.Description</div>
                         <div class="card-footer">$ @product.Price</div>
+                        
                         <div class="card-footer"><a id="itemDetails" asp-controller="Product" asp-route-id="@product.ID" asp-action="Details"  >View Details</a></div>
                         @if (signInManager.IsSignedIn(User))
                         {
@@ -42,5 +50,6 @@
             </div>
         </div>
     }
+
 </div>
 

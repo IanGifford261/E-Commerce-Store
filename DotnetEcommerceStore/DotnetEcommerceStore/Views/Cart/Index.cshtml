@@ -1,8 +1,17 @@
-@model DotnetEcommerceStore.Models.ViewModels.CartViewModel
+@model IEnumerable<DotnetEcommerceStore.Models.CartItems>
+@using DotnetEcommerceStore.Models.Interfaces
+@inject IInventory InventoryService
+@using Microsoft.AspNetCore.Identity
+@using DotnetEcommerceStore.Models
+@inject SignInManager<ApplicationUser> signInManager
 
 @{
     Layout = "_Layout";
+
+    decimal total = 0;
 }
+
+<link rel="stylesheet" href="~/Styles/Cart.css" />
 
 <div class="checkoutForm">
     <h2>Your Shopping Cart</h2>
@@ -16,25 +25,49 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var line in Model.Cart.CartItems)
+
+            @foreach (var line in Model)
             {
-                <tr>
-                    <td>@line.Quantity</td>
-                    <td>@line.Product.Name</td>
-                    <td>@line.Product.Price</td>
-                    <td>@((line.Quantity * line.Product.Price).ToString("c"))</td>
-                    <td><a asp-controller="Basket" asp-action="DeleteCartItem" asp-route-CartItemID="@line.CartItemsID"></a></td>
-                </tr>
+            <tr>
+                <td>@line.Quantity</td>
+                <td>@line.Product.Name</td>
+                <td>@line.Product.Price.ToString("c")</td>
+                <td>@((line.Quantity * line.Product.Price).ToString("c"))</td>
+                <td>@line.CartItemsID</td>
+
+                @{
+                    total = total + (line.Quantity * line.Product.Price);
+                }
+
+                <td><form class="card-footer" method="post"><button class="AddToBasket" asp-controller="Cart" asp-action="DeleteCartItem" value="@line.CartItemsID" name="userID" type="submit">Remove from Basket</button></form></td>
+
+            </tr>
             }
         </tbody>
         <tfoot>
             <tr>
                 <td>Total:</td>
-                <td>@Model.CartTotal.ToString("c")</td>
+
+                <td>
+                    @total.ToString("c")
+                </td>
             </tr>
+
         </tfoot>
+        <tfoot>
+
+        </tfoot>
+
     </table>
-    <div>
-        <a asp-controller="Order" asp-action="Checkout">Checkout</a>
-    </div>
+    <form class="card-footer" method="post"><button class="AddToBasket" asp-controller="Checkout" asp-action="Checkout" value="@User.Identity.Name" name="userID" type="submit">Checkout</button></form>
 </div>
+
+<td>
+    @* form class="card-footer" method="post"><button class="AddToBasket" asp-controller="Checkout" asp-action="Checkout" value="@User.Identity.Name" name="name" type="submit">Checkout</button></form> *@
+
+    @*  *@
+
+
+    @*  *@
+
+    @*  *@
