@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DotnetEcommerceStore.Models.Interfaces;
 
 namespace DotnetEcommerceStore.Models
 {
@@ -20,7 +21,11 @@ namespace DotnetEcommerceStore.Models
             Configuration = configuration;
         }
 
-        public string Run()
+        /// <summary>
+        /// Charges the user's Credit Card
+        /// </summary>
+        /// <returns>String "OK" or "Not OK"</returns>
+        public bool SwipeCard(creditCardType creditCard, string userID, customerAddressType billingAddress, decimal totalPrice)
         {
             ApiOperationBase<ANetApiRequest, ANetApiResponse>.RunEnvironment = AuthorizeNet.Environment.SANDBOX;
 
@@ -31,20 +36,15 @@ namespace DotnetEcommerceStore.Models
                 Item = Configuration["AuthorizeNetTransKey"]
             };
 
-            creditCardType creditCard = new creditCardType
-            {
-                cardNumber = Configuration["CreditCardNumber"],
-                expirationDate = Configuration["ExpirationDate"]
-            };
-
-            customerAddressType billingAddress = GetAddress();
+            
+            
 
             paymentType paymentType = new paymentType { Item = creditCard };
 
             transactionRequestType transReqType = new transactionRequestType
             {
                 transactionType = transactionTypeEnum.authCaptureTransaction.ToString(),
-                amount = 123.45m,
+                amount = 3.45m,
                 payment = paymentType,
                 billTo = billingAddress
             };
@@ -64,7 +64,7 @@ namespace DotnetEcommerceStore.Models
                 if(response.messages.resultCode == messageTypeEnum.Ok)
                 {
                     //out transaction was successful.
-                    return "OK";
+                    return true;
                 }
                 else
                 {
@@ -72,26 +72,16 @@ namespace DotnetEcommerceStore.Models
                 }
             }
 
-            return "Not OK";
+            return false;
         }
 
-        
+        /*
 
-
-        customerAddressType GetAddress()
-        {
-            customerAddressType address = new customerAddressType()
-            {
-                firstName = "John",
-                lastName = "Doe",
-                address = "123 6ft Deep Lane",
-                city = "Hellsgate",
-                zip = "91206"
-            };
-
-            return address;
-        }
-
+        /// <summary>
+        /// Product to be charged against (May need to be changed or deleted)
+        /// </summary>
+        /// <param name="products">Checkout Items</param>
+        /// <returns>Billing Items</returns>
         private lineItemType[] GetLineItems(List<CheckoutItems> products)
         {
             lineItemType[] items = new lineItemType[products.Count];
@@ -110,6 +100,7 @@ namespace DotnetEcommerceStore.Models
 
             return items;
         }
+        */
     }
     
 }
