@@ -44,6 +44,7 @@ namespace DotnetEcommerceStore
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("Professional Musician", policy => policy.Requirements.Add(new ProMusicianRequirment(true)));
+                options.AddPolicy("Admin Access", policy => policy.RequireRole(ApplicationRoles.Admin));
             });
             // products
             var conProducts = Environment.IsDevelopment()
@@ -70,9 +71,6 @@ namespace DotnetEcommerceStore
 
             //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //services.AddScoped(c => Models.CartService.GetCart(c));
-
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
