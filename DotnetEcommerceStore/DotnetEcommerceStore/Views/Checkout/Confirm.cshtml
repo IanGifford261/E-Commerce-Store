@@ -13,12 +13,14 @@
     decimal total = 0;
 }
 
-<link rel="stylesheet" href="~/Styles/Cart.css" />
+<link rel="stylesheet" href="~/Styles/StyleSheet.css" />
+<link rel="stylesheet" href="~/Styles/Checkout.css" />
+<link rel="stylesheet" href="~/Styles/Confirm.css" />
 
 <h1>Confirm</h1>
 
 <div class="checkoutForm">
-    <h2>Please Confirm Your Order, Billing Information, and Shipping information</h2>
+    <h2>Please Confirm Your Order</h2>
     <table class="table">
         <thead>
             <tr>
@@ -37,7 +39,7 @@
                     <td>@line.Product.Name</td>
                     <td>@line.Product.Price.ToString("c")</td>
                     <td>@((line.Quantity * line.Product.Price).ToString("c"))</td>
-                    @{ 
+                    @{
                         total = total + (line.Quantity * line.Product.Price);
                     }
 
@@ -61,5 +63,16 @@
         </tfoot>
 
     </table>
-    <form class="card-footer" method="post"><button class="AddToBasket" asp-controller="Checkout" asp-action="Confirm" value="@User.Identity.Name" name="userID" type="submit">Process Order</button></form>
+
+    <a asp-controller="Checkout" asp-action="Billing">Payment Info</a>
+
+    @*<form class="card-footer" method="post"><button class="AddToBasket" asp-controller="Checkout" asp-action="Confirm" value="@User.Identity.Name" name="userID" type="submit">Process Order</button></form>*@
+
+    @*<form class="card-footer" method="post"><button class="AddToBasket" asp-controller="Checkout" asp-action="Billing" value="@User.Identity.Name" name="userID" type="submit">Payment Info</button></form>*@
+
+    @*<form asp-controller="Checkout" asp-action="Billing">
+            <input type="hidden" name="userID" value="@User.Identity.Name" method="Post" />
+            <button class="AddToBasket" type="submit">Payment Info</button>
+        </form>*@
+
 </div>

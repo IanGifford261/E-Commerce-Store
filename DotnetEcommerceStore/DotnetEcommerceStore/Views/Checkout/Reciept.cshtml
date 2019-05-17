@@ -1,0 +1,19 @@
+﻿@model IEnumerable<DotnetEcommerceStore.Models.CheckoutItems>
+@using DotnetEcommerceStore.Models.Interfaces
+@inject IInventory InventoryService
+@using Microsoft.AspNetCore.Identity
+@using DotnetEcommerceStore.Models
+@inject SignInManager<ApplicationUser> signInManager
+
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Confirm";
+
+}
+
+<link rel="stylesheet" href="~/Styles/StyleSheet.css" />
+<link rel="stylesheet" href="~/Styles/Checkout.css" />
+<link rel="stylesheet" href="~/Styles/Receipt.css" />
+
+<h1>Receipt</h1>

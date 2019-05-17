@@ -1,0 +1,5 @@
+﻿body {
+    background: url(../Images/Background/CheckoutBackground.jpg) no-repeat center center fixed; /*background image is free-use from https://www.vecteezy.com/vector-art/234598-abstract-music-notes */
+    background-size: cover;
+    color: moccasin;
+}

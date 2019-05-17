@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AuthorizeNet.Api.Contracts.V1;
 using DotnetEcommerceStore.Models;
 using DotnetEcommerceStore.Models.Interfaces;
+using DotnetEcommerceStore.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace DotnetEcommerceStore.Controllers
 {
@@ -21,6 +24,8 @@ namespace DotnetEcommerceStore.Controllers
         private SignInManager<ApplicationUser> _signInManager;
         private IEmailSender _emailSender;
 
+        private IConfiguration Configuration { get; set; }
+        
 
         /// <summary>
         /// Connects the injections to the controller
@@ -29,11 +34,12 @@ namespace DotnetEcommerceStore.Controllers
         /// <param name="cartItems">ICartItems</param>
         /// <param name="checkout">ICheckout</param>
         /// <param name="userManager">IUserManager</param>
-        public CheckoutController(ICart cart, ICartItems cartItems, ICheckout checkout, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender)
+        public CheckoutController(IConfiguration configuration, ICart cart, ICartItems cartItems, ICheckout checkout, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender)
         {
             _cart = cart;
             _cartItems = cartItems;
             _checkout = checkout;
+            Configuration = configuration;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -89,23 +95,49 @@ namespace DotnetEcommerceStore.Controllers
 
             return View(purchases);
         }
-
-        /// <summary>
-        /// Will confirm that the order is what the customer wants (may be removed because it might be duplicated)
-        /// </summary>
-        public void ConfirmOrder()
+        
+        
+        public async Task<IActionResult> Billing(string userID)
         {
-            MakePayment();
-            CheckoutEmail();
-            CheckoutReceipt();
+            return View();
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public void MakePayment()
+        public async Task<IActionResult> MakePayment([Bind("UserID,FirstName,LastName,Address,City,ZipCode")]PaymentViewModel pvm)
         {
+            creditCardType creditCard = new creditCardType
+            {
+                cardNumber = Configuration["CreditCardNumber"],
+                expirationDate = Configuration["ExpirationDate"]
+            };
 
+            var billingAddress = new customerAddressType
+            {
+                firstName = pvm.FirstName,
+                lastName = pvm.LastName,
+                address = pvm.Address,
+                city = pvm.City,
+                zip = pvm.ZipCode
+            };
+
+            decimal amount = 3.23m;
+
+            Payment payment = new Payment(Configuration);
+
+            bool result = payment.SwipeCard(creditCard, pvm.UserID, billingAddress, amount);
+
+            if (result)
+            {
+                CheckoutEmail();
+                CheckoutReceipt();
+                return RedirectToAction("Receipt", "Checkout");
+            }
+            else
+            {
+                return RedirectToAction("Confirm", "Checkout");
+            }
         }
 
         public async void CheckoutEmail()
