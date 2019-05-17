@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DotnetEcommerceStore.Models;
 using DotnetEcommerceStore.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,9 +20,12 @@ namespace DotnetEcommerceStore.Pages.Admin
             _checkout = checkout;
         }
 
-        public void GetOrders()
-        {
+        public int? ID { get; set; }
+        public List<Checkout> CheckoutItems { get; set; }
 
-        }
+        //public async Task GetOrderHistory()
+        //{
+        //    CheckoutItems = await _checkout.GetLastTenCheckouts();
+        //}
     }
 }

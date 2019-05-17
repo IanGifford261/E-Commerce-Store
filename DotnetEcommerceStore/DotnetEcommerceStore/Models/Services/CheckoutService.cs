@@ -79,6 +79,12 @@ namespace DotnetEcommerceStore.Models.Services
             return checkout;
         }
 
+        public async Task<List<Checkout>>GetLastTenCheckouts()
+        {
+            var co = await _checkout.Checkout.ToListAsync();
+            var lastTen = co.OrderByDescending(x => x.ID).Take(10).ToList();
+            return lastTen;
+        }
         /// <summary>
         /// (Read) Gets all the items in the Checkout
         /// </summary>
