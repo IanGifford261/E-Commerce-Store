@@ -13,6 +13,6 @@ namespace DotnetEcommerceStore.Models.Interfaces
         Task<Product> GetProduct(int id);
         Task UpdateProduct(int id, Product product);
         Task DeleteProduct(int id);
-        bool ProductExists(int id);
+        bool ProductExists(int id);       
     }
 }

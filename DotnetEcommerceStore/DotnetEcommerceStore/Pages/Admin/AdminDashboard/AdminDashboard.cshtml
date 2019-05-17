@@ -5,8 +5,9 @@
 @inject SignInManager<ApplicationUser> _signInManager
 @{
     ViewData["Title"] = "AdminDashboard";
+    Layout = "_Layout";
 }
 
-<h2>Hi world</h2>
-@*<h1>Admin Dashboard for @User.Claims.First(name => name.Type == "FirstName").Value!</h1>*@
-
+@*<h2>Hi world</h2>*@
+<h1>Admin Dashboard for @User.Claims.First(name => name.Type == "FirstName").Value!</h1>
+<h2><a asp-page="/ProductManagement/ProductManagement">Product Management</a></h2>

@@ -23,9 +23,34 @@ namespace DotnetEcommerceStore.Pages.Admin.ProductManagement
         public int? ID { get; set; }
         public Product Product { get; set; }
 
-        public void OnGet()
+        public async Task OnGet()
         {
-            
+            Product = await _inventory.GetProduct(ID.GetValueOrDefault()) ?? new Product();
+        }
+
+        public async Task<IActionResult> OnPost()
+        {
+            var postProduct = await _inventory.GetProduct(ID.GetValueOrDefault()) ?? new Product();
+            postProduct.Name = Product.Name;
+            postProduct.SKU = Product.SKU;
+            postProduct.Description = Product.Description;
+            postProduct.Price = Product.Price;
+
+            if (ID != null)
+            {
+                await _inventory.UpdateProduct(postProduct.ID, postProduct);
+            }
+            if (ID == null)
+            {
+                await _inventory.Create(postProduct);
+            };
+            return RedirectToPage("ProductManagement");
+        }
+
+        public async Task<IActionResult> Delete()
+        {
+            await _inventory.DeleteProduct(ID.Value);
+            return RedirectToPage("ProductManagement");
         }
     }
 }
