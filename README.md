@@ -46,20 +46,6 @@ Then select and open ``` EComerce.sln ```
 
 ------------------------------
 
-## Visuals
-
-
-##### Application Start
-![Image 1](/Assets/Splash.png =550x)
-
-##### Application Login
-![Image 2](/Assets/login.png =550x)
-
-##### Application Register
-![Image 3](/Assets/register.png =550x)
-
-------------------------------
-
 ## Change Log
 - V 1.0.0 *Initialization* 22APR2019
 - V 1.0.1 *MVC Scaffoded out, Basic Functionality complete* 23APR2019
